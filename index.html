@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentz Store - Top Up Game Terpercaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #080c14;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .card-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+        }
+        .active-card {
+            border-color: #06b6d4 !important;
+            background: rgba(6, 182, 212, 0.1) !important;
+        }
+
+        /* Efek Biru Berkilau (Shimmer Glow) hanya sekeliling elemen yang ditekan */
+        @keyframes buttonGlowEffect {
+            0% {
+                box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.9), inset 0 0 10px rgba(6, 182, 212, 0.6);
+                border-color: #06b6d4;
+            }
+            50% {
+                box-shadow: 0 0 18px 4px rgba(6, 182, 212, 0.8), inset 0 0 15px rgba(59, 130, 246, 0.8);
+                border-color: #3b82f6;
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+            }
+        }
+
+        .click-sparkle {
+            animation: buttonGlowEffect 0.5s ease-out forwards !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Container Utama Sesuai Urutan Tampilan -->
+    <div class="max-w-md md:max-w-4xl mx-auto w-full p-4 space-y-4">
+        
+        <!-- 1 & 2. Judul, Waktu, & Status Admin -->
+        <div class="card-box rounded-xl p-4 space-y-2 border border-slate-800">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-orbitron font-bold text-sm">
+                    GS
+                </div>
+                <h1 class="font-orbitron font-extrabold text-xl text-white tracking-wider">GENTZ STORE</h1>
+            </div>
+            
+            <p class="text-xs text-slate-300 font-medium">Top Up Game Terpercaya</p>
+            
+            <!-- Waktu & Status Admin (Menyatu Rapi di Atas) -->
+            <div class="pt-2 border-t border-slate-800 text-xs space-y-1">
+                <div class="flex items-center gap-2 text-cyan-400 font-mono">
+                    <i class="far fa-clock"></i>
+                    <span id="wib-clock" class="font-bold">--:--:-- WIB</span>
+                </div>
+                <div class="flex items-center gap-2 font-mono text-[11px]" id="admin-status-container">
+                    <span id="admin1-badge" class="text-slate-400">Admin 1: OFFLINE</span>
+                    <span class="text-slate-600">|</span>
+                    <span id="admin2-badge" class="text-slate-400">Admin 2: OFFLINE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 & 4. Keterangan Toko & Jadwal Shift -->
+        <div class="card-box rounded-xl p-4 space-y-3 border border-slate-800">
+            <div class="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Layanan Resmi & Terpercaya</span>
+            </div>
+            
+            <h2 class="font-orbitron text-lg font-bold text-white tracking-wide">GENTZ STORE TOP UP</h2>
+            
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Layanan Top-Up Game Favoritmu dengan Pembayaran QRIS & SociaBuzz.
+            </p>
+            
+            <div class="pt-2 border-t border-slate-800 text-xs text-slate-300 space-y-1">
+                <div class="font-semibold text-cyan-400 flex items-center gap-1 mb-1">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Jadwal Shift Admin (WIB):</span>
+                </div>
+                <div>Admin 1: <span class="font-mono text-white">14.00 - 17.00 WIB</span></div>
+                <div>Admin 2: <span class="font-mono text-white">17.00 - 22.00 WIB</span></div>
+            </div>
+        </div>
+
+        <!-- 5. Pilihan Game (Nomor 1) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">1</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Pilih Game</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="game-grid">
+                <!-- Roblox -->
+                <div onclick="triggerSparkle(this); selectGame('roblox')" id="game-roblox" class="game-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
+                    <i class="fa-solid fa-cube text-cyan-400 text-lg w-5 text-center"></i>
+                    <div>
+                        <div class="font-semibold text-xs text-white">Roblox</div>
+                        <div class="text-[10px] text-slate-400">Robux</div>
+                    </div>
+                </div>
+
+                <!-- Mobile Legends -->
+                <div onclick="triggerSparkle(this); selectGame('mlbb')" id="game-mlbb" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
+                    <i class="fa-solid fa-shield-halved text-yellow-400 text-lg w-5 text-center"></i>
+                    <div>
+                        <div class="font-semibold text-xs text-white">Mobile Legends</div>
+                        <div class="text-[10px] text-slate-400">Diamonds</div>
+                    </div>
+                </div>
+
+                <!-- Free Fire -->
+                <div onclick="triggerSparkle(this); selectGame('ff')" id="game-ff" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
+                    <i class="fa-solid fa-fire text-orange-500 text-lg w-5 text-center"></i>
+                    <div>
+                        <div class="font-semibold text-xs text-white">Free Fire</div>
+                        <div class="text-[10px] text-slate-400">Diamonds</div>
+                    </div>
+                </div>
+
+                <!-- PUBG Mobile -->
+                <div onclick="triggerSparkle(this); selectGame('pubg')" id="game-pubg" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
+                    <i class="fa-solid fa-crosshair text-emerald-400 text-lg w-5 text-center"></i>
+                    <div>
+                        <div class="font-semibold text-xs text-white">PUBG Mobile</div>
+                        <div class="text-[10px] text-slate-400">Unknown Cash (UC)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Data Akun (Nomor 2) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">2</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Data Akun</h3>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1" id="lbl-user-id">Username / User ID Roblox</label>
+                    <input type="text" id="user-id" placeholder="Masukkan Username / ID" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                </div>
+                <div id="zone-id-container" class="hidden">
+                    <label class="block text-xs text-slate-400 mb-1">Zone ID / Server ID</label>
+                    <input type="text" id="zone-id" placeholder="(1234)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Daftar Harga / Nominal Top Up (Nomor 3) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">3</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Daftar Harga & Nominal</h3>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="nominal-grid">
+                <!-- Dynamic Items -->
+            </div>
+        </div>
+
+        <!-- 8. Metode Pembayaran (Nomor 4) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">4</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Metode Pembayaran</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div onclick="triggerSparkle(this); selectPayment('qris')" id="pay-qris" class="pay-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex justify-between items-center transition-all">
+                    <div>
+                        <div class="font-bold text-xs text-white">QRIS</div>
+                        <div class="text-[10px] text-slate-400">All E-Wallet / Bank</div>
+                    </div>
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-sm"></i>
+                </div>
+                <div onclick="triggerSparkle(this); selectPayment('sociabuzz')" id="pay-sociabuzz" class="pay-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex justify-between items-center transition-all">
+                    <div>
+                        <div class="font-bold text-xs text-white">SociaBuzz</div>
+                        <div class="text-[10px] text-slate-400">Dukungan / Saweria</div>
+                    </div>
+                    <i class="fa-solid fa-circle-check text-slate-600 text-sm"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Kode Voucher (Nomor 5) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">5</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Kode Voucher</h3>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="voucher-input" placeholder="Masukkan kode voucher" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-cyan-500">
+                <button onclick="triggerSparkle(this); applyVoucher()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs transition-colors">Gunakan</button>
+            </div>
+            <p id="voucher-msg" class="text-xs mt-2 hidden"></p>
+
+            <div class="mt-3 pt-3 border-t border-slate-800/80 text-[11px] space-y-1">
+                <p class="font-semibold text-slate-400">🎁 Voucher Aktif:</p>
+                <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
+                    <span class="font-mono font-bold text-cyan-400">GENTZSTORETOPUPTERPERCAYA</span> - Diskon 5% (Kuota: <b id="quota-1">5</b>x)
+                </div>
+                <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
+                    <span class="font-mono font-bold text-cyan-400">GENTZSTORE100%TERPERCAYA</span> - Diskon 10% (Kuota: <b id="quota-2">3</b>x)
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Admin WhatsApp & Ringkasan Checkout (Nomor 6) -->
+        <div class="card-box rounded-xl p-4 border border-slate-800 space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">6</span>
+                <h3 class="font-orbitron font-bold text-sm text-white">Pilih Admin WhatsApp</h3>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+                <div onclick="triggerSparkle(this); selectAdmin(1)" id="card-admin-1" class="admin-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 transition-all">
+                    <div class="font-bold text-xs text-white">Admin 1</div>
+                    <div class="text-[10px] text-slate-400">14.00 - 17.00 WIB</div>
+                </div>
+
+                <div onclick="triggerSparkle(this); selectAdmin(2)" id="card-admin-2" class="admin-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 transition-all">
+                    <div class="font-bold text-xs text-white">Admin 2</div>
+                    <div class="text-[10px] text-slate-400">17.00 - 22.00 WIB</div>
+                </div>
+            </div>
+
+            <!-- Ringkasan Bayar -->
+            <div class="bg-slate-900/90 p-3 rounded-lg border border-slate-800 text-xs space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Selected Game:</span>
+                    <span id="sum-game" class="text-white font-semibold">Roblox</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Nominal Item:</span>
+                    <span id="sum-item" class="text-cyan-300 font-semibold">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Metode Bayar:</span>
+                    <span id="sum-payment" class="text-white font-semibold">QRIS</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Admin Tujuan:</span>
+                    <span id="sum-admin" class="text-cyan-400 font-semibold">Admin 1</span>
+                </div>
+                <div class="border-t border-slate-800 pt-2 flex justify-between items-center">
+                    <span class="font-bold text-white">Total Bayar:</span>
+                    <span id="sum-total" class="font-orbitron font-bold text-base text-cyan-400">Rp 0</span>
+                </div>
+            </div>
+
+            <button onclick="triggerSparkle(this); processCheckout()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold py-3 rounded-lg text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                BAYAR VIA WHATSAPP
+            </button>
+        </div>
+
+    </div>
+
+    <footer class="border-t border-slate-800 py-4 text-center text-[11px] text-slate-500">
+        &copy; 2026 Gentz Store. All rights reserved.
+    </footer>
+
+    <script>
+        const gameData = {
+            roblox: {
+                name: "Roblox",
+                hasZone: false,
+                idLabel: "Username / User ID Roblox",
+                items: [
+                    { id: "rbx-50", name: "50 Robux", price: 9350 },
+                    { id: "rbx-100", name: "100 Robux", price: 15700 },
+                    { id: "rbx-200", name: "200 Robux", price: 28400 },
+                    { id: "rbx-300", name: "300 Robux", price: 41100 },
+                    { id: "rbx-400", name: "400 Robux", price: 53800 },
+                    { id: "rbx-500", name: "500 Robux", price: 66500 },
+                    { id: "rbx-600", name: "600 Robux", price: 79200 },
+                    { id: "rbx-700", name: "700 Robux", price: 91900 },
+                    { id: "rbx-800", name: "800 Robux", price: 104600 },
+                    { id: "rbx-900", name: "900 Robux", price: 117300 },
+                    { id: "rbx-1000", name: "1.000 Robux", price: 130000 },
+                    { id: "rbx-1500", name: "1.500 Robux", price: 193500 },
+                    { id: "rbx-2000", name: "2.000 Robux", price: 257000 },
+                    { id: "rbx-2500", name: "2.500 Robux", price: 320500 },
+                    { id: "rbx-3000", name: "3.000 Robux", price: 384000 },
+                    { id: "rbx-4000", name: "4.000 Robux", price: 511000 },
+                    { id: "rbx-5000", name: "5.000 Robux", price: 638000 }
+                ]
+            },
+            ff: {
+                name: "Free Fire",
+                hasZone: false,
+                idLabel: "User ID Free Fire",
+                items: [
+                    { id: "ff-5", name: "5 Diamond", price: 1000 },
+                    { id: "ff-10", name: "10 Diamond", price: 2000 },
+                    { id: "ff-12", name: "12 Diamond", price: 2100 },
+                    { id: "ff-50", name: "50 Diamond", price: 8000 },
+                    { id: "ff-70", name: "70 Diamond", price: 10500 },
+                    { id: "ff-80", name: "80 Diamond", price: 12500 },
+                    { id: "ff-100", name: "100 Diamond", price: 14500 },
+                    { id: "ff-130", name: "130 Diamond", price: 19500 },
+                    { id: "ff-150", name: "150 Diamond", price: 22000 },
+                    { id: "ff-200", name: "200 Diamond", price: 29000 },
+                    { id: "ff-355", name: "355 Diamond", price: 49000 },
+                    { id: "ff-420", name: "420 Diamond", price: 58500 },
+                    { id: "ff-500", name: "500 Diamond", price: 69500 },
+                    { id: "ff-800", name: "800 Diamond", price: 109100 },
+                    { id: "ff-1000", name: "1000 Diamond", price: 136100 },
+                    { id: "ff-2180", name: "2180 Diamond", price: 291000 },
+                    { id: "ff-3640", name: "3640 Diamond", price: 485000 }
+                ]
+            },
+            mlbb: {
+                name: "Mobile Legends",
+                hasZone: true,
+                idLabel: "User ID Mobile Legends",
+                items: [
+                    { id: "ml-5", name: "5 Diamond", price: 1800 },
+                    { id: "ml-12", name: "12 Diamond", price: 4100 },
+                    { id: "ml-19", name: "19 Diamond", price: 6350 },
+                    { id: "ml-28", name: "28 Diamond", price: 9500 },
+                    { id: "ml-50", name: "50 Diamond", price: 17500 },
+                    { id: "ml-85", name: "85 Diamond", price: 26500 },
+                    { id: "ml-113", name: "113 Diamond", price: 36000 },
+                    { id: "ml-170", name: "170 Diamond", price: 52900 },
+                    { id: "ml-240", name: "240 Diamond", price: 74500 },
+                    { id: "ml-301", name: "301 Diamond", price: 93500 },
+                    { id: "ml-355", name: "355 Diamond", price: 110200 },
+                    { id: "ml-408", name: "408 Diamond", price: 125600 },
+                    { id: "ml-512", name: "512 Diamond", price: 159100 },
+                    { id: "ml-601", name: "601 Diamond", price: 182400 },
+                    { id: "ml-712", name: "712 Diamond", price: 216800 },
+                    { id: "ml-875", name: "875 Diamond", price: 262100 },
+                    { id: "ml-965", name: "965 Diamond", price: 292000 },
+                    { id: "ml-1135", name: "1135 Diamond", price: 344500 },
+                    { id: "ml-1507", name: "1507 Diamond", price: 455200 },
+                    { id: "ml-2010", name: "2010 Diamond", price: 570000 },
+                    { id: "ml-5398", name: "5398 Diamond", price: 1545000 },
+                    { id: "ml-10050", name: "10050 Diamond", price: 2865000 }
+                ]
+            },
+            pubg: {
+                name: "PUBG Mobile",
+                hasZone: false,
+                idLabel: "Player ID PUBG",
+                items: [
+                    { id: "pubg-60", name: "60 UC", price: 17200 },
+                    { id: "pubg-325", name: "300+25 UC", price: 80999 },
+                    { id: "pubg-660", name: "600+60 UC", price: 161999 },
+                    { id: "pubg-1800", name: "1500+300 UC", price: 404500 },
+                    { id: "pubg-3850", name: "3000+850 UC", price: 809299 },
+                    { id: "pubg-8100", name: "6000+2100 UC", price: 1619299 }
+                ]
+            }
+        };
+
+        const adminNumbers = {
+            1: "6283166907655",
+            2: "6283815425825"
+        };
+
+        let currentSelectedGame = 'roblox';
+        let currentSelectedItem = null;
+        let currentPayment = 'qris';
+        let currentAdmin = 1;
+        let appliedVoucher = null;
+
+        const defaultVouchers = {
+            "GENTZSTORETOPUPTERPERCAYA": { discountPercent: 5, maxQuota: 5 },
+            "GENTZSTORE100%TERPERCAYA": { discountPercent: 10, maxQuota: 3 }
+        };
+
+        function triggerSparkle(element) {
+            if (!element) return;
+            element.classList.remove('click-sparkle');
+            void element.offsetWidth;
+            element.classList.add('click-sparkle');
+            setTimeout(() => {
+                element.classList.remove('click-sparkle');
+            }, 500);
+        }
+
+        function getUserVoucherUsage() {
+            return JSON.parse(localStorage.getItem('gentz_voucher_usage') || '{}');
+        }
+
+        function setUserVoucherUsage(usage) {
+            localStorage.setItem('gentz_voucher_usage', JSON.stringify(usage));
+        }
+
+        function updateQuotaDisplay() {
+            const usage = getUserVoucherUsage();
+            const q1 = defaultVouchers["GENTZSTORETOPUPTERPERCAYA"].maxQuota - (usage["GENTZSTORETOPUPTERPERCAYA"] || 0);
+            const q2 = defaultVouchers["GENTZSTORE100%TERPERCAYA"].maxQuota - (usage["GENTZSTORE100%TERPERCAYA"] || 0);
+            document.getElementById('quota-1').innerText = Math.max(0, q1);
+            document.getElementById('quota-2').innerText = Math.max(0, q2);
+        }
+
+        function updateWIBClock() {
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const wibDate = new Date(utc + (3600000 * 7));
+
+            const hours = wibDate.getHours();
+            const minutes = wibDate.getMinutes();
+            const seconds = wibDate.getSeconds();
+
+            const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} WIB`;
+            document.getElementById('wib-clock').innerText = timeStr;
+
+            const isAdmin1Online = hours >= 14 && hours < 17;
+            const isAdmin2Online = hours >= 17 && hours < 22;
+
+            document.getElementById('admin1-badge').className = isAdmin1Online ? "text-emerald-400 font-bold" : "text-slate-400";
+            document.getElementById('admin1-badge').innerText = `Admin 1: ${isAdmin1Online ? 'ONLINE' : 'OFFLINE'}`;
+
+            document.getElementById('admin2-badge').className = isAdmin2Online ? "text-emerald-400 font-bold" : "text-slate-400";
+            document.getElementById('admin2-badge').innerText = `Admin 2: ${isAdmin2Online ? 'ONLINE' : 'OFFLINE'}`;
+        }
+
+        function selectGame(gameKey) {
+            currentSelectedGame = gameKey;
+            const data = gameData[gameKey];
+
+            document.querySelectorAll('.game-card').forEach(c => c.classList.remove('active-card'));
+            document.getElementById(`game-${gameKey}`).classList.add('active-card');
+
+            document.getElementById('lbl-user-id').innerText = data.idLabel;
+            const zoneContainer = document.getElementById('zone-id-container');
+            if (data.hasZone) {
+                zoneContainer.classList.remove('hidden');
+            } else {
+                zoneContainer.classList.add('hidden');
+            }
+
+            renderNominals(data.items);
+            document.getElementById('sum-game').innerText = data.name;
+        }
+
+        function renderNominals(items) {
+            const grid = document.getElementById('nominal-grid');
+            grid.innerHTML = '';
+            currentSelectedItem = null;
+
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.id = `item-${item.id}`;
+                card.className = `nom-card card-box rounded-lg p-2.5 cursor-pointer border border-slate-800 hover:border-cyan-500 transition-all flex flex-col justify-between ${index === 0 ? 'active-card' : ''}`;
+                card.onclick = function() {
+                    triggerSparkle(this);
+                    selectNominal(item);
+                };
+
+                card.innerHTML = `
+                    <span class="text-xs font-bold text-white">${item.name}</span>
+                    <span class="text-xs font-mono text-cyan-400 font-semibold mt-1">Rp ${item.price.toLocaleString('id-ID')}</span>
+                `;
+                grid.appendChild(card);
+
+                if (index === 0) selectNominal(item);
+            });
+        }
+
+        function selectNominal(item) {
+            currentSelectedItem = item;
+            document.querySelectorAll('.nom-card').forEach(c => c.classList.remove('active-card'));
+            const activeElem = document.getElementById(`item-${item.id}`);
+            if(activeElem) activeElem.classList.add('active-card');
+            updateSummary();
+        }
+
+        function selectPayment(payKey) {
+            currentPayment = payKey;
+            document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('active-card'));
+            document.getElementById(`pay-${payKey}`).classList.add('active-card');
+            document.getElementById('sum-payment').innerText = payKey.toUpperCase();
+        }
+
+        function selectAdmin(adminNum) {
+            currentAdmin = adminNum;
+            document.querySelectorAll('.admin-card').forEach(c => c.classList.remove('active-card'));
+            document.getElementById(`card-admin-${adminNum}`).classList.add('active-card');
+            document.getElementById('sum-admin').innerText = `Admin ${adminNum}`;
+        }
+
+        function applyVoucher() {
+            const input = document.getElementById('voucher-input').value.trim().toUpperCase();
+            const msg = document.getElementById('voucher-msg');
+
+            if (!input) {
+                msg.className = "text-xs mt-2 text-rose-400 font-semibold";
+                msg.innerText = "Masukkan kode voucher terlebih dahulu!";
+                msg.classList.remove('hidden');
+                return;
+            }
+
+            const voucher = defaultVouchers[input];
+            if (!voucher) {
+                msg.className = "text-xs mt-2 text-rose-400 font-semibold";
+                msg.innerText = "Kode voucher tidak valid!";
+                msg.classList.remove('hidden');
+                appliedVoucher = null;
+                updateSummary();
+                return;
+            }
+
+            const usage = getUserVoucherUsage();
+            const usedCount = usage[input] || 0;
+
+            if (usedCount >= voucher.maxQuota) {
+                msg.className = "text-xs mt-2 text-rose-400 font-semibold";
+                msg.innerText = "Kuota pemakaian voucher Anda telah habis!";
+                msg.classList.remove('hidden');
+                appliedVoucher = null;
+                updateSummary();
+                return;
+            }
+
+            appliedVoucher = { code: input, discountPercent: voucher.discountPercent };
+            msg.className = "text-xs mt-2 text-emerald-400 font-semibold";
+            msg.innerText = `Voucher dipasang! Diskon ${voucher.discountPercent}%`;
+            msg.classList.remove('hidden');
+            updateSummary();
+        }
+
+        function updateSummary() {
+            if (!currentSelectedItem) return;
+
+            const subtotal = currentSelectedItem.price;
+            let discount = 0;
+
+            if (appliedVoucher) {
+                discount = Math.round(subtotal * (appliedVoucher.discountPercent / 100));
+            }
+
+            const total = Math.max(0, subtotal - discount);
+
+            document.getElementById('sum-item').innerText = currentSelectedItem.name;
+            document.getElementById('sum-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        function processCheckout() {
+            const userId = document.getElementById('user-id').value.trim();
+            const zoneId = document.getElementById('zone-id').value.trim();
+            const game = gameData[currentSelectedGame];
+
+            if (!userId) {
+                alert(`Harap isi ${game.idLabel}!`);
+                return;
+            }
+
+            if (game.hasZone && !zoneId) {
+                alert("Harap isi Zone ID / Server ID Mobile Legends!");
+                return;
+            }
+
+            if (appliedVoucher) {
+                const usage = getUserVoucherUsage();
+                usage[appliedVoucher.code] = (usage[appliedVoucher.code] || 0) + 1;
+                setUserVoucherUsage(usage);
+                updateQuotaDisplay();
+            }
+
+            const subtotal = currentSelectedItem.price;
+            const discount = appliedVoucher ? Math.round(subtotal * (appliedVoucher.discountPercent / 100)) : 0;
+            const total = subtotal - discount;
+
+            let msg = ` Halo Admin ${currentAdmin} (Gentz Store),
+Saya ingin melakukan Top-Up Game dengan detail berikut:
+
+`;
+            msg += ` Toko: Gentz Store
+`;
+            msg += ` Game: ${game.name}
+`;
+            msg += ` User ID: ${userId}
+`;
+            if (game.hasZone) msg += ` Zone ID: ${zoneId}
+`;
+            msg += ` Item: ${currentSelectedItem.name}
+`;
+            msg += ` Pembayaran: ${currentPayment.toUpperCase()}
+`;
+            if (appliedVoucher) {
+                msg += ` Kode Voucher: ${appliedVoucher.code} (-${appliedVoucher.discountPercent}%)
+`;
+            }
+            msg += ` Subtotal: Rp ${subtotal.toLocaleString('id-ID')}
+`;
+            msg += ` Total Bayar: Rp ${total.toLocaleString('id-ID')}
+
+`;
+            msg += `Mohon instruksi pembayaran selengkapnya. Terima kasih!`;
+
+            const phone = adminNumbers[currentAdmin];
+            const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        window.onload = () => {
+            selectGame('roblox');
+            updateQuotaDisplay();
+            updateWIBClock();
+            setInterval(updateWIBClock, 1000);
+        };
+    </script>
+</body>
+</html>
