@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gentz Store - Top Up Game Terpercaya</title>
+    <title>Gentz Store - Top Up Game & Beli Nokos Terpercaya</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -25,7 +25,42 @@
         }
         .active-card {
             border-color: #06b6d4 !important;
-            background: rgba(6, 182, 212, 0.1) !important;
+            background: rgba(6, 182, 212, 0.12) !important;
+        }
+
+        /* Navbar Pill Top */
+        .top-pill-nav {
+            background: linear-gradient(180deg, rgba(30, 34, 42, 0.92) 0%, rgba(18, 21, 28, 0.96) 100%);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+        .nav-icon-circle {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .nav-icon-circle:hover {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        /* Gaya Biru Cerah untuk Pricelist Nokos */
+        .nokos-bright-card {
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
+            border: 2px solid #7dd3fc;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+        }
+        .nokos-table-wrap {
+            background: #f0f9ff;
+            color: #0c4a6e;
+            border: 2px solid #38bdf8;
+        }
+        .nokos-row:nth-child(even) {
+            background-color: #e0f2fe;
+        }
+        .nokos-row:hover {
+            background-color: #bae6fd;
         }
 
         /* Efek Biru Berkilau (Shimmer Glow) hanya sekeliling elemen yang ditekan */
@@ -46,25 +81,480 @@
         .click-sparkle {
             animation: buttonGlowEffect 0.5s ease-out forwards !important;
         }
+
+        /* Animasi Spin Wheel */
+        @keyframes spinRoll {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .spin-anim {
+            animation: spinRoll 0.12s infinite alternate;
+        }
+
+
+        /* Kartu Statistik Gentz Store (2 Kolom Biru) */
+        .stat-blue-card {
+            background: linear-gradient(145deg, #0c1e38 0%, #091529 100%);
+            border: 1px solid rgba(6, 182, 212, 0.45);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.12), inset 0 1px 0 rgba(56, 189, 248, 0.2);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .stat-blue-card:hover {
+            border-color: #22d3ee;
+            transform: translateY(-1px);
+        }
+
+        /* Custom Scrollbar */
+        .chat-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 9999px;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between pb-20">
 
-    <!-- Container Utama Sesuai Urutan Tampilan -->
-    <div class="max-w-md md:max-w-4xl mx-auto w-full p-4 space-y-4">
+    <!-- 🔹 NAVIGASI ATAS (SELALU ADA DI SETIAP HALAMAN) -->
+    <header class="sticky top-3 z-50 px-4 pt-1">
+        <div class="max-w-md md:max-w-4xl mx-auto top-pill-nav rounded-full px-3 py-2 flex items-center justify-between">
+            <!-- ☰ Garis tiga -> BUKA MENU PILIHAN -->
+            <button onclick="triggerSparkle(this); toggleDrawer('menu-drawer')" aria-label="Menu Pilihan" class="nav-icon-circle w-10 h-10 rounded-full flex items-center justify-center text-white text-base cursor-pointer">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Judul Tengah Halaman Aktif -->
+            <div onclick="triggerSparkle(this); switchPage('topup')" class="cursor-pointer text-center">
+                <span id="nav-center-title" class="font-bold text-base tracking-wide text-white">Home</span>
+            </div>
+
+            <!-- 📢 Saluran WA, ! Aturan Toko, ❓ Bantuan, 👤 Logo Orang & 🔔 Logo Lonceng -->
+            <div class="flex items-center gap-1 sm:gap-1.5">
+                <!-- TOMBOL SALURAN WHATSAPP RESMI -->
+                <button onclick="triggerSparkle(this); openChannelModal()" aria-label="Saluran WhatsApp Resmi" title="Saluran WhatsApp Resmi Gentz Store" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-emerald-400 text-base cursor-pointer relative border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/25">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+
+                <!-- LOGO ! UNTUK ATURAN DI GENTZ STORE -->
+                <button onclick="triggerSparkle(this); openRulesModal()" aria-label="Aturan Gentz Store" title="Peringatan Penting & Aturan Gentz Store" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-amber-400 font-orbitron font-extrabold text-base cursor-pointer relative border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/25">
+                    <i class="fa-solid fa-exclamation"></i>
+                    <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping opacity-75"></span>
+                    <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                </button>
+
+                <button onclick="triggerSparkle(this); openHelpChat()" aria-label="Bantuan / Layanan Pelanggan" title="Bantuan / Obrolan Langsung" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-cyan-400 text-base cursor-pointer relative">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span id="nav-chat-badge" class="hidden absolute -top-1 -right-1 bg-rose-500 text-white font-extrabold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">!</span>
+                </button>
+                <button onclick="triggerSparkle(this); toggleDrawer('account-drawer')" aria-label="Cek Akun" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white text-base cursor-pointer relative">
+                    <i class="fa-regular fa-user"></i>
+                    <span id="nav-user-dot" class="hidden absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-400"></span>
+                </button>
+                <button onclick="triggerSparkle(this); toggleDrawer('orders-drawer')" aria-label="Cek Pesanan" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white text-base cursor-pointer relative">
+                    <i class="fa-regular fa-bell"></i>
+                    <span id="nav-bell-badge" class="hidden absolute -top-1 -right-1 bg-cyan-500 text-slate-950 font-extrabold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- DRAWER OVERLAY -->
+    <div id="drawer-backdrop" onclick="closeAllDrawers()" class="fixed inset-0 bg-black/75 backdrop-blur-xs z-50 hidden"></div>
+
+    <!-- =====================================================================
+         ⚠️ MODAL LOGO (!) ATURAN & PERINGATAN PENTING GENTZ STORE
+         ===================================================================== -->
+    <div id="rules-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="card-box w-full max-w-lg rounded-2xl border-2 border-amber-500/70 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <!-- Header Modal Aturan -->
+            <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 px-4 py-3.5 flex items-center justify-between text-slate-950">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-slate-950 text-amber-400 flex items-center justify-center font-orbitron font-extrabold text-base shadow">
+                        !
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron font-extrabold text-xs sm:text-sm tracking-wide">⚠️ PERINGATAN PENTING</h3>
+                        <p class="text-[10px] font-bold text-slate-900">BACA SEBELUM MEMBAYAR • ATURAN GENTZ STORE</p>
+                    </div>
+                </div>
+                <button onclick="closeAllDrawers()" class="w-7 h-7 rounded-full bg-slate-950/20 hover:bg-slate-950/40 flex items-center justify-center text-slate-950 text-xs cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Isi Aturan Lengkap -->
+            <div class="p-4 overflow-y-auto chat-scroll space-y-3.5 text-xs bg-slate-950/90">
+                
+                <!-- 🔹 NAMA RESMI PEMBAYARAN GENTZ STORE -->
+                <div class="bg-slate-900 border border-cyan-500/40 rounded-xl p-3.5 space-y-2.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs flex items-center gap-1.5">
+                        <span>🔹 NAMA RESMI PEMBAYARAN GENTZ STORE:</span>
+                    </div>
+                    
+                    <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-lg p-2.5 space-y-1">
+                        <div class="text-emerald-300 font-bold">✅ QRIS: <span class="text-white">Gentz Store Coach Arfie, Cikarang, Kesehatan &amp; Olahraga</span></div>
+                        <div class="text-amber-300 text-[11px] font-semibold pl-4">⚠️ Selain nama di atas → <span class="underline">BUKAN QRIS GENTZ STORE</span></div>
+                    </div>
+
+                    <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-lg p-2.5 space-y-1">
+                        <div class="text-emerald-300 font-bold">✅ Sociabuzz: <span class="text-white">Gentz Store / gentza201414</span></div>
+                        <div class="text-amber-300 text-[11px] font-semibold pl-4">⚠️ Selain nama di atas → <span class="underline">BUKAN Sociabuzz Gentz Store</span></div>
+                    </div>
+                </div>
+
+                <!-- 🔹 ATURAN PEMBAYARAN -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs">🔹 ATURAN PEMBAYARAN:</div>
+                    <ul class="space-y-1.5 text-slate-200 leading-relaxed pl-1">
+                        <li>• Jika salah mengirim pembayaran ke QRIS / Sociabuzz yang bukan resmi → <b class="text-rose-400">BUKAN tanggung jawab Admin Gentz Store</b></li>
+                        <li>• Daftar nama resmi sudah tercantum di atas, harap periksa dengan teliti sebelum membayar</li>
+                        <li>• Pembayaran via QRIS &amp; Sociabuzz: <b class="text-amber-300">ada biaya tambahan admin sebesar Rp 200 per transaksi</b></li>
+                    </ul>
+                </div>
+
+                <!-- 🔹 ATURAN REFUND -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs">🔹 ATURAN REFUND:</div>
+                    <div class="space-y-1 text-slate-200 leading-relaxed">
+                        <div class="text-emerald-400 font-semibold">✅ Bisa refund: <span class="text-slate-200 font-normal">Jika pesanan <b>BELUM</b> diproses</span></div>
+                        <div class="text-rose-400 font-semibold">❌ TIDAK bisa refund: <span class="text-slate-200 font-normal">Jika pesanan <b>SUDAH</b> diproses</span></div>
+                        <ul class="space-y-1 pl-1 pt-1">
+                            <li>• Proses refund maksimal <b>1×24 jam kerja</b></li>
+                            <li>• <b>Bukti pembayaran wajib dilampirkan</b> saat mengajukan refund</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 🔹 ATURAN PEMILIHAN ADMIN -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs">🔹 ATURAN PEMILIHAN ADMIN:</div>
+                    <ul class="space-y-1.5 text-slate-200 leading-relaxed pl-1">
+                        <li>• Pilih hanya Admin yang statusnya <b class="text-emerald-400">ONLINE</b> saat melakukan pesanan</li>
+                        <li>• Jika Admin yang dipilih sedang <b class="text-slate-400">OFFLINE</b>, pesanan akan diproses saat admin kembali online</li>
+                        <li>• Admin yang sedang bertugas:
+                            <div class="pl-4 mt-1 space-y-0.5 font-mono text-[11px] text-cyan-300">
+                                <div>• Admin 1: 14.00 – 17.00 WIB</div>
+                                <div>• Admin 2: 17.00 – 22.00 WIB</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 🔹 ATURAN LAINNYA -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs">🔹 ATURAN LAINNYA:</div>
+                    <ul class="space-y-1.5 text-slate-200 leading-relaxed pl-1">
+                        <li>• Pembayaran yang masuk ke akun palsu bukan tanggung jawab Gentz Store</li>
+                        <li>• Selalu konfirmasi pesanan setelah membayar dengan melampirkan bukti pembayaran yang jelas</li>
+                        <li>• Pesanan hanya akan diproses ke akun pembeli yang sudah terverifikasi pembayarannya</li>
+                        <li>• Jam layanan refund mengikuti jam operasional Admin</li>
+                        <li>• Gentz Store berhak menolak refund jika ada indikasi pemesanan palsu</li>
+                        <li>• Harga dapat berubah sewaktu-waktu tanpa pemberitahuan terlebih dahulu</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Tombol Tutup / Mengerti -->
+            <div class="p-3 bg-slate-900 border-t border-slate-800">
+                <button onclick="triggerSparkle(this); closeAllDrawers()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-orbitron font-extrabold py-2.5 rounded-xl text-xs transition-all cursor-pointer">
+                    ✅ SAYA MENGERTI &amp; SETUJU ATURAN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         📢 MODAL SALURAN WHATSAPP RESMI GENTZ STORE
+         ===================================================================== -->
+    <div id="channel-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="card-box w-full max-w-md rounded-2xl border-2 border-emerald-500/70 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <!-- Header Modal Saluran WA -->
+            <div class="bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 px-4 py-3.5 flex items-center justify-between text-slate-950">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-slate-950 text-emerald-400 flex items-center justify-center text-base shadow">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron font-extrabold text-xs sm:text-sm tracking-wide">📢 SALURAN WHATSAPP RESMI</h3>
+                        <p class="text-[10px] font-bold text-slate-900">GENTZ STORE OFFICIAL CHANNEL</p>
+                    </div>
+                </div>
+                <button onclick="closeAllDrawers()" class="w-7 h-7 rounded-full bg-slate-950/20 hover:bg-slate-950/40 flex items-center justify-center text-slate-950 text-xs cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Isi Modal Saluran WA -->
+            <div class="p-4 overflow-y-auto chat-scroll space-y-3.5 text-xs bg-slate-950/95">
+                
+                <!-- Tautan Resmi -->
+                <div class="bg-emerald-950/40 border border-emerald-500/50 rounded-xl p-3.5 space-y-2.5 text-center">
+                    <div class="font-bold text-emerald-300 text-xs">🔹 Klik tautan di bawah untuk bergabung ke Saluran WhatsApp Gentz Store:</div>
+                    <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-extrabold py-3 px-3 rounded-xl text-xs shadow-lg shadow-emerald-500/25 transition-all">
+                        <i class="fa-brands fa-whatsapp text-sm mr-1"></i> GABUNG SALURAN WHATSAPP RESMI
+                    </a>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-lg p-2 text-[10px] font-mono text-cyan-300 break-all select-all">
+                        https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t
+                    </div>
+                </div>
+
+                <!-- Fungsi Saluran WhatsApp -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-cyan-400 text-xs">🔹 Fungsi Saluran WhatsApp Gentz Store:</div>
+                    <ul class="space-y-1.5 text-slate-200 leading-relaxed pl-1">
+                        <li>• Dapatkan update harga terbaru</li>
+                        <li>• Info promo dan diskon eksklusif</li>
+                        <li>• Pengumuman event dan giveaway</li>
+                        <li>• Informasi produk terbaru</li>
+                        <li>• Pengumuman jam layanan</li>
+                    </ul>
+                </div>
+
+                <!-- Peringatan Keamanan -->
+                <div class="bg-amber-500/10 border border-amber-500/50 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-amber-400 text-xs">⚠️ PERINGATAN:</div>
+                    <ul class="space-y-1.5 text-amber-200 leading-relaxed pl-1 font-medium">
+                        <li>• Ini <b>SATU-SATUNYA</b> saluran resmi WhatsApp Gentz Store</li>
+                        <li>• Selain link di atas → <b class="text-rose-400">BUKAN saluran resmi Gentz Store</b></li>
+                        <li>• Selalu pastikan Anda membuka link yang benar sebelum mengklik</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="p-3 bg-slate-900 border-t border-slate-800">
+                <button onclick="triggerSparkle(this); closeAllDrawers()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-orbitron font-bold py-2.5 rounded-xl text-xs transition-all cursor-pointer">
+                    TUTUP
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. DRAWER ☰ MENU PILIHAN -->
+    <div id="menu-drawer" class="fixed top-20 left-4 right-4 max-w-md mx-auto z-50 hidden">
+        <div class="card-box rounded-2xl p-4 border border-cyan-500/40 shadow-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span class="font-orbitron font-bold text-xs text-cyan-400">☰ MENU PILIHAN GENTZ STORE</span>
+                <button onclick="closeAllDrawers()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-2">
+                <button id="menu-btn-topup" onclick="triggerSparkle(this); switchPage('topup'); closeAllDrawers();" class="w-full text-left p-3 rounded-xl border border-cyan-500 bg-cyan-500/15 text-white font-bold text-xs flex items-center justify-between transition-all">
+                    <span>🎮 Top Up Game</span>
+                    <i class="fa-solid fa-chevron-right text-cyan-400 text-[10px]"></i>
+                </button>
+                <button id="menu-btn-nokos" onclick="triggerSparkle(this); switchPage('nokos'); closeAllDrawers();" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:border-sky-400 text-white font-bold text-xs flex items-center justify-between transition-all">
+                    <span>🛒 Beli Nokos</span>
+                    <span class="bg-sky-500 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">BIRU CERAH</span>
+                </button>
+                <button onclick="triggerSparkle(this); openChannelModal();" class="w-full text-left p-3 rounded-xl border border-emerald-500/50 bg-emerald-500/10 hover:border-emerald-400 text-emerald-300 font-bold text-xs flex items-center justify-between transition-all">
+                    <span>📢 Saluran WhatsApp Resmi</span>
+                    <span class="bg-emerald-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">OFFICIAL</span>
+                </button>
+                <button onclick="triggerSparkle(this); openRulesModal();" class="w-full text-left p-3 rounded-xl border border-amber-500/50 bg-amber-500/10 hover:border-amber-400 text-amber-300 font-bold text-xs flex items-center justify-between transition-all">
+                    <span>⚠️ Aturan &amp; Peringatan Penting (!)</span>
+                    <span class="bg-amber-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">WAJIB BACA</span>
+                </button>
+                <button onclick="triggerSparkle(this); openHelpChat();" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:border-cyan-400 text-white font-bold text-xs flex items-center justify-between transition-all">
+                    <span>💬 Bantuan / Layanan Pelanggan</span>
+                    <span class="text-cyan-400 text-[10px]">Chat Langsung</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. DRAWER 👤 CEK AKUN -->
+    <div id="account-drawer" class="fixed top-20 left-4 right-4 max-w-md mx-auto z-50 hidden max-h-[82vh] overflow-y-auto">
+        <div class="card-box rounded-2xl p-4 border border-cyan-500/40 shadow-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span class="font-orbitron font-bold text-xs text-cyan-400">👤 CEK AKUN &amp; LOGIN</span>
+                <button onclick="closeAllDrawers()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="drawer-logged-in" class="hidden space-y-3">
+                <div class="bg-slate-900/90 border border-slate-700 rounded-xl p-3 space-y-1.5 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Username:</span>
+                        <span id="drawer-acc-username" class="font-bold text-white font-mono">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Jenis Akun:</span>
+                        <span id="drawer-acc-role" class="font-bold text-cyan-400">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Riwayat Pesanan:</span>
+                        <span id="drawer-acc-history-count" class="font-bold text-emerald-400">0 Pesanan</span>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <div class="text-[11px] font-semibold text-slate-300">📋 Riwayat Pesanan Terbaru:</div>
+                    <div id="drawer-acc-history-list" class="space-y-1.5 max-h-40 overflow-y-auto text-[11px]"></div>
+                </div>
+
+                <button onclick="triggerSparkle(this); logoutUser(); closeAllDrawers();" class="w-full bg-rose-500 hover:bg-rose-400 text-white font-orbitron font-bold py-2.5 rounded-xl text-xs transition-all">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> LOGOUT AKUN
+                </button>
+            </div>
+
+            <div id="drawer-logged-out" class="space-y-3">
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="d-tab-login" onclick="triggerSparkle(this); switchDrawerAuthTab('login')" class="bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs">LOGIN</button>
+                    <button id="d-tab-register" onclick="triggerSparkle(this); switchDrawerAuthTab('register')" class="bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs">DAFTAR</button>
+                </div>
+
+                <div id="d-form-login" class="space-y-2">
+                    <input type="text" id="d-login-username" placeholder="Username (Peka huruf besar/kecil)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    <input type="password" id="d-login-password" placeholder="Password (Peka huruf besar/kecil)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    <button onclick="triggerSparkle(this); handleDrawerLogin()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-orbitron font-bold py-2 rounded-lg text-xs">MASUK AKUN</button>
+                </div>
+
+                <div id="d-form-register" class="space-y-2 hidden">
+                    <input type="text" id="d-reg-username" placeholder="Username Baru" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    <input type="password" id="d-reg-password" placeholder="Password Baru" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    <button onclick="triggerSparkle(this); handleDrawerRegister()" class="w-full bg-emerald-500 text-slate-950 font-orbitron font-bold py-2 rounded-lg text-xs">DAFTAR BARU</button>
+                </div>
+
+                <p id="d-auth-msg" class="text-xs font-semibold hidden"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DRAWER 🔔 CEK PESANAN -->
+    <div id="orders-drawer" class="fixed top-20 left-4 right-4 max-w-md mx-auto z-50 hidden max-h-[82vh] overflow-y-auto">
+        <div class="card-box rounded-2xl p-4 border border-cyan-500/40 shadow-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span class="font-orbitron font-bold text-xs text-cyan-400" id="drawer-orders-title">🔔 CEK PESANAN</span>
+                <button onclick="closeAllDrawers()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="drawer-orders-locked" class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 text-center text-xs text-slate-400">
+                🔒 Silakan login terlebih dahulu (klik ikon 👤) untuk melihat status pesanan.
+            </div>
+
+            <div id="drawer-orders-list" class="hidden space-y-2"></div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         ❓ JENDELA OBROLAN BANTUAN / LAYANAN PELANGGAN (IN-SITE LIVE CHAT)
+         ===================================================================== -->
+    <div id="help-chat-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="card-box w-full max-w-md rounded-2xl border border-cyan-500/60 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+            <div class="bg-gradient-to-r from-cyan-600 to-blue-700 px-4 py-3 flex items-center justify-between text-white">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron font-bold text-xs tracking-wide">BANTUAN GENTZ STORE</h3>
+                        <p class="text-[10px] text-cyan-100" id="chat-header-subtitle">Obrolan Langsung di Dalam Situs</p>
+                    </div>
+                </div>
+                <button onclick="closeAllDrawers()" class="w-7 h-7 rounded-full bg-black/20 hover:bg-black/40 flex items-center justify-center text-white text-xs cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- KONTEN UNTUK AKUN ADMIN BIASA (DIBATASI) -->
+            <div id="chat-admin-restricted" class="hidden p-6 text-center space-y-3">
+                <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-400 flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h4 class="font-orbitron font-bold text-sm text-white">AKSES KHUSUS OWNER</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Maaf, akun <b>Admin biasa</b> tidak memiliki akses ke fitur obrolan Layanan Pelanggan. Hanya akun <b>Owner</b> yang dapat melihat dan membalas pesan dari pembeli.
+                </p>
+            </div>
+
+            <!-- KONTEN UNTUK PEMESAN / PENGGUNA / TAMU -->
+            <div id="chat-buyer-view" class="hidden flex flex-col flex-1 overflow-hidden">
+                <div id="buyer-chat-status-bar" class="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">Status Obrolan:</span>
+                    <span id="buyer-chat-status-text" class="font-semibold text-cyan-400">Siap membantu Anda</span>
+                </div>
+
+                <div id="buyer-chat-messages" class="flex-1 p-4 space-y-3 overflow-y-auto chat-scroll min-h-[240px] max-h-[340px] bg-slate-950/60">
+                    <div class="flex flex-col items-start">
+                        <div class="bg-slate-800 border border-slate-700 text-slate-200 rounded-2xl rounded-tl-xs px-3.5 py-2.5 text-xs max-w-[85%]">
+                            Halo! Selamat datang di Layanan Pelanggan <b>Gentz Store</b>. Silakan tulis pertanyaan atau kendala Anda di bawah ini. Semua obrolan dilakukan langsung di dalam situs tanpa perlu membuka WhatsApp.
+                        </div>
+                        <span class="text-[9px] text-slate-500 mt-1 ml-1">Sistem Gentz Store</span>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-900 border-t border-slate-800 space-y-2">
+                    <div id="guest-name-box" class="hidden">
+                        <input type="text" id="chat-guest-name" placeholder="Nama / Username Anda (opsional)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="buyer-chat-input" onkeypress="if(event.key==='Enter') sendBuyerChatMessage()" placeholder="Tulis pertanyaan atau kendala Anda..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                        <button onclick="triggerSparkle(this); sendBuyerChatMessage()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Kirim</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONTEN KHUSUS OWNER -->
+            <div id="chat-owner-view" class="hidden flex flex-col flex-1 overflow-hidden">
+                <div class="bg-amber-500/10 border-b border-amber-500/30 px-4 py-2 flex items-center justify-between text-[11px]">
+                    <span class="text-amber-300 font-bold">👑 PANEL OWNER — INBOX PELANGGAN</span>
+                    <span id="owner-thread-count" class="text-slate-300 font-mono">0 Obrolan</span>
+                </div>
+
+                <div id="owner-thread-list" class="p-2.5 bg-slate-900/90 border-b border-slate-800 flex gap-1.5 overflow-x-auto"></div>
+
+                <div id="owner-chat-messages" class="flex-1 p-4 space-y-3 overflow-y-auto chat-scroll min-h-[220px] max-h-[300px] bg-slate-950/60">
+                    <div class="text-center text-xs text-slate-400 py-8">Belum ada pesan masuk dari pembeli.</div>
+                </div>
+
+                <div id="owner-reply-box" class="p-3 bg-slate-900 border-t border-slate-800 flex gap-2">
+                    <input type="text" id="owner-chat-input" onkeypress="if(event.key==='Enter') sendOwnerReplyMessage()" placeholder="Tulis balasan Owner untuk pembeli..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
+                    <button onclick="triggerSparkle(this); sendOwnerReplyMessage()" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer">
+                        <i class="fa-solid fa-reply"></i>
+                        <span>Balas</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOMBOL MENGAMBANG "BANTUAN" -->
+    <button onclick="triggerSparkle(this); openHelpChat()" id="floating-help-btn" class="fixed bottom-4 right-4 z-40 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-orbitron font-extrabold px-4 py-3 rounded-full shadow-lg shadow-cyan-500/30 border border-cyan-300/60 flex items-center gap-2 text-xs cursor-pointer transition-all">
+        <i class="fa-solid fa-comments text-base"></i>
+        <span>Bantuan</span>
+        <span id="floating-chat-dot" class="hidden w-2.5 h-2.5 rounded-full bg-rose-600 border border-white"></span>
+    </button>
+
+    <!-- =====================================================================
+         HALAMAN 1: 🎮 TOP UP GAME (HOME)
+         ===================================================================== -->
+    <div id="page-topup" class="max-w-md md:max-w-4xl mx-auto w-full p-4 space-y-4">
         
         <!-- 1 & 2. Judul, Waktu, & Status Admin -->
         <div class="card-box rounded-xl p-4 space-y-2 border border-slate-800">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-orbitron font-bold text-sm">
-                    GS
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-orbitron font-bold text-sm">
+                        GS
+                    </div>
+                    <h1 class="font-orbitron font-extrabold text-xl text-white tracking-wider">GENTZ STORE</h1>
                 </div>
-                <h1 class="font-orbitron font-extrabold text-xl text-white tracking-wider">GENTZ STORE</h1>
+                <div id="user-badge-top" class="text-[11px] font-mono">
+                    <span class="text-slate-400">Belum Login</span>
+                </div>
             </div>
             
-            <p class="text-xs text-slate-300 font-medium">Top Up Game Terpercaya</p>
+            <p class="text-xs text-slate-300 font-medium">Top Up Game &amp; Beli Nokos Terpercaya</p>
             
-            <!-- Waktu & Status Admin (Menyatu Rapi di Atas) -->
+            <!-- Waktu & Status Admin -->
             <div class="pt-2 border-t border-slate-800 text-xs space-y-1">
                 <div class="flex items-center gap-2 text-cyan-400 font-mono">
                     <i class="far fa-clock"></i>
@@ -78,17 +568,83 @@
             </div>
         </div>
 
+        <!-- 📊 FITUR STATISTIK GENTZ STORE (TERLIHAT SEMUA PENGUNJUNG) -->
+        <div class="grid grid-cols-2 gap-3" id="gentz-stats-section">
+            <!-- Kotak 1: Total Akun Terdaftar -->
+            <div onclick="triggerSparkle(this)" class="stat-blue-card rounded-2xl p-4 flex flex-col items-center justify-center text-center cursor-pointer">
+                <div class="flex items-center justify-center gap-2.5">
+                    <i class="fa-solid fa-users text-cyan-400 text-2xl sm:text-3xl drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"></i>
+                    <span id="stat-total-accounts" class="font-orbitron font-extrabold text-2xl sm:text-3xl text-cyan-300 tracking-wide">0</span>
+                </div>
+                <div class="mt-1.5 text-[11px] sm:text-xs font-semibold text-sky-200/90">Total Akun Terdaftar</div>
+            </div>
+
+            <!-- Kotak 2: Total Pembeli (Pesanan Selesai Diproses) -->
+            <div onclick="triggerSparkle(this)" class="stat-blue-card rounded-2xl p-4 flex flex-col items-center justify-center text-center cursor-pointer">
+                <div class="flex items-center justify-center gap-2.5">
+                    <i class="fa-solid fa-cart-shopping text-blue-400 text-2xl sm:text-3xl drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"></i>
+                    <span id="stat-total-buyers" class="font-orbitron font-extrabold text-2xl sm:text-3xl text-sky-300 tracking-wide">0</span>
+                </div>
+                <div class="mt-1.5 text-[11px] sm:text-xs font-semibold text-sky-200/90">Total Pembeli</div>
+            </div>
+        </div>
+
+        <!-- BANNER SALURAN WHATSAPP RESMI GENTZ STORE -->
+        <div class="bg-gradient-to-r from-emerald-500/20 via-teal-500/15 to-emerald-500/20 border border-emerald-500/60 rounded-xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500 text-slate-950 text-lg flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/30">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <div class="font-orbitron font-bold text-xs text-emerald-300">📢 SALURAN WHATSAPP RESMI GENTZ STORE</div>
+                        <div class="text-[11px] text-slate-300">Update harga terbaru, promo eksklusif, event &amp; info jam layanan</div>
+                    </div>
+                </div>
+                <button onclick="triggerSparkle(this); openChannelModal()" class="bg-slate-900 hover:bg-slate-800 border border-emerald-500/50 text-emerald-300 font-bold text-[10px] px-2.5 py-1 rounded-lg shrink-0 cursor-pointer">
+                    INFO
+                </button>
+            </div>
+            <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-extrabold py-2 rounded-lg text-[11px] transition-all">
+                👉 GABUNG SALURAN WHATSAPP RESMI
+            </a>
+            <div class="text-[10px] text-amber-300/90 text-center">
+                ⚠️ Satu-satunya saluran resmi: <span class="font-mono underline">whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t</span>
+            </div>
+        </div>
+
+        <!-- BANNER TOMBOL LOGO (!) ATURAN TOKO (MUDAH DIKLIK SEBELUM MEMBAYAR) -->
+        <div onclick="triggerSparkle(this); openRulesModal()" class="cursor-pointer bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-500/20 border border-amber-500/60 hover:border-amber-400 rounded-xl p-3.5 flex items-center justify-between gap-3 transition-all">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-amber-400 text-slate-950 font-orbitron font-extrabold text-base flex items-center justify-center shrink-0 shadow-md shadow-amber-500/30">
+                    !
+                </div>
+                <div>
+                    <div class="font-orbitron font-bold text-xs text-amber-300">⚠️ PERINGATAN PENTING — BACA SEBELUM MEMBAYAR</div>
+                    <div class="text-[11px] text-slate-300">Cek nama resmi QRIS &amp; SociaBuzz, biaya admin Rp 200, dan aturan refund</div>
+                </div>
+            </div>
+            <span class="bg-amber-400 text-slate-950 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0">
+                LIHAT
+            </span>
+        </div>
+
         <!-- 3 & 4. Keterangan Toko & Jadwal Shift -->
         <div class="card-box rounded-xl p-4 space-y-3 border border-slate-800">
-            <div class="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
-                <i class="fa-solid fa-bolt"></i>
-                <span>Layanan Resmi & Terpercaya</span>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Layanan Resmi &amp; Terpercaya</span>
+                </div>
+                <button onclick="triggerSparkle(this); switchPage('nokos')" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-2.5 py-1 rounded-lg text-[10px] transition-all">
+                    🛒 Buka Pricelist Nokos →
+                </button>
             </div>
             
             <h2 class="font-orbitron text-lg font-bold text-white tracking-wide">GENTZ STORE TOP UP</h2>
             
             <p class="text-xs text-slate-300 leading-relaxed">
-                Layanan Top-Up Game Favoritmu dengan Pembayaran QRIS & SociaBuzz.
+                Layanan Top-Up Game Favoritmu dengan Pembayaran QRIS &amp; SociaBuzz (biaya admin Rp 200/transaksi).
             </p>
             
             <div class="pt-2 border-t border-slate-800 text-xs text-slate-300 space-y-1">
@@ -101,6 +657,73 @@
             </div>
         </div>
 
+        <!-- 🔐 SISTEM AKUN GENTZ STORE (LOGIN & DAFTAR) -->
+        <div class="card-box rounded-xl p-4 border border-cyan-500/40 space-y-3" id="auth-section">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">🔐</span>
+                    <h3 class="font-orbitron font-bold text-sm text-cyan-400">SISTEM AKUN GENTZ STORE</h3>
+                </div>
+                <button id="btn-logout" onclick="triggerSparkle(this); logoutUser()" class="hidden bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/50 text-rose-300 font-bold px-2.5 py-1 rounded text-[10px] transition-all">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i>Keluar
+                </button>
+            </div>
+
+            <div id="auth-forms-container" class="space-y-3">
+                <div class="grid grid-cols-2 gap-2">
+                    <button id="tab-login" onclick="triggerSparkle(this); switchAuthTab('login')" class="bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all">
+                        LOGIN AKUN
+                    </button>
+                    <button id="tab-register" onclick="triggerSparkle(this); switchAuthTab('register')" class="bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all">
+                        DAFTAR BARU
+                    </button>
+                </div>
+
+                <div id="form-login" class="space-y-2.5">
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Username (Peka huruf besar/kecil)</label>
+                        <input type="text" id="login-username" placeholder="Masukkan Username" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Password (Peka huruf besar/kecil)</label>
+                        <input type="password" id="login-password" placeholder="Masukkan Password" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <button onclick="triggerSparkle(this); handleLogin()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-orbitron font-bold py-2.5 rounded-lg text-xs transition-all">
+                        MASUK SEKARANG
+                    </button>
+                </div>
+
+                <div id="form-register" class="space-y-2.5 hidden">
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Username Baru (Peka huruf besar/kecil)</label>
+                        <input type="text" id="reg-username" placeholder="Buat Username baru" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Password Baru (Peka huruf besar/kecil)</label>
+                        <input type="password" id="reg-password" placeholder="Buat Password baru" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
+                    </div>
+                    <button onclick="triggerSparkle(this); handleRegister()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold py-2.5 rounded-lg text-xs transition-all">
+                        DAFTAR AKUN BARU
+                    </button>
+                </div>
+
+                <p id="auth-msg" class="text-xs font-semibold hidden"></p>
+                <div class="text-[10px] text-slate-400 border-t border-slate-800 pt-2">
+                    ⚠️ Wajib login untuk akses fitur top-up, beli nokos, dan cek pesanan.
+                </div>
+            </div>
+
+            <div id="auth-logged-in-panel" class="hidden bg-slate-900/90 border border-slate-700 rounded-lg p-3 space-y-1.5">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-emerald-400 font-semibold" id="welcome-user-text">✅ Berhasil masuk!</span>
+                    <span id="user-role-badge" class="text-[10px] font-orbitron font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">USER</span>
+                </div>
+                <div class="text-[11px] text-slate-400" id="user-access-desc">
+                    Akses: Top Up Game, Beli Nokos, Cek Pesanan, Lihat Harga &amp; Voucher
+                </div>
+            </div>
+        </div>
+
         <!-- 5. Pilihan Game (Nomor 1) -->
         <div class="card-box rounded-xl p-4 border border-slate-800">
             <div class="flex items-center gap-2 mb-3">
@@ -109,7 +732,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="game-grid">
-                <!-- Roblox -->
                 <div onclick="triggerSparkle(this); selectGame('roblox')" id="game-roblox" class="game-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
                     <i class="fa-solid fa-cube text-cyan-400 text-lg w-5 text-center"></i>
                     <div>
@@ -118,7 +740,6 @@
                     </div>
                 </div>
 
-                <!-- Mobile Legends -->
                 <div onclick="triggerSparkle(this); selectGame('mlbb')" id="game-mlbb" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
                     <i class="fa-solid fa-shield-halved text-yellow-400 text-lg w-5 text-center"></i>
                     <div>
@@ -127,7 +748,6 @@
                     </div>
                 </div>
 
-                <!-- Free Fire -->
                 <div onclick="triggerSparkle(this); selectGame('ff')" id="game-ff" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
                     <i class="fa-solid fa-fire text-orange-500 text-lg w-5 text-center"></i>
                     <div>
@@ -136,7 +756,6 @@
                     </div>
                 </div>
 
-                <!-- PUBG Mobile -->
                 <div onclick="triggerSparkle(this); selectGame('pubg')" id="game-pubg" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
                     <i class="fa-solid fa-crosshair text-emerald-400 text-lg w-5 text-center"></i>
                     <div>
@@ -169,34 +788,43 @@
         <div class="card-box rounded-xl p-4 border border-slate-800">
             <div class="flex items-center gap-2 mb-3">
                 <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">3</span>
-                <h3 class="font-orbitron font-bold text-sm text-white">Daftar Harga & Nominal</h3>
+                <h3 class="font-orbitron font-bold text-sm text-white">Daftar Harga &amp; Nominal</h3>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="nominal-grid">
-                <!-- Dynamic Items -->
-            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="nominal-grid"></div>
         </div>
 
         <!-- 8. Metode Pembayaran (Nomor 4) -->
         <div class="card-box rounded-xl p-4 border border-slate-800">
-            <div class="flex items-center gap-2 mb-3">
-                <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">4</span>
-                <h3 class="font-orbitron font-bold text-sm text-white">Metode Pembayaran</h3>
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center font-orbitron">4</span>
+                    <h3 class="font-orbitron font-bold text-sm text-white">Metode Pembayaran</h3>
+                </div>
+                <button onclick="triggerSparkle(this); openRulesModal()" class="text-[10px] font-bold text-amber-400 hover:underline flex items-center gap-1 cursor-pointer">
+                    <span class="w-4 h-4 rounded-full bg-amber-400 text-slate-950 inline-flex items-center justify-center font-orbitron text-[10px]">!</span>
+                    <span>Cek Nama Resmi</span>
+                </button>
             </div>
             <div class="grid grid-cols-2 gap-2">
                 <div onclick="triggerSparkle(this); selectPayment('qris')" id="pay-qris" class="pay-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex justify-between items-center transition-all">
                     <div>
                         <div class="font-bold text-xs text-white">QRIS</div>
-                        <div class="text-[10px] text-slate-400">All E-Wallet / Bank</div>
+                        <div class="text-[10px] text-emerald-400 font-semibold">✅ Tanpa minimal (+Rp 200)</div>
                     </div>
                     <i class="fa-solid fa-circle-check text-cyan-400 text-sm"></i>
                 </div>
                 <div onclick="triggerSparkle(this); selectPayment('sociabuzz')" id="pay-sociabuzz" class="pay-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex justify-between items-center transition-all">
                     <div>
                         <div class="font-bold text-xs text-white">SociaBuzz</div>
-                        <div class="text-[10px] text-slate-400">Dukungan / Saweria</div>
+                        <div class="text-[10px] text-amber-400 font-semibold">Min. Rp 15.000 (+Rp 200)</div>
                     </div>
                     <i class="fa-solid fa-circle-check text-slate-600 text-sm"></i>
                 </div>
+            </div>
+            <div id="topup-payment-note" class="mt-2.5 bg-slate-900/90 border border-slate-800 rounded-lg p-2.5 text-[11px] text-slate-300 space-y-1">
+                <div>✅ Nama Resmi QRIS: <b class="text-white">Gentz Store Coach Arfie, Cikarang, Kesehatan &amp; Olahraga</b></div>
+                <div>✅ Nama Resmi Sociabuzz: <b class="text-white">Gentz Store / gentza201414</b></div>
+                <div class="text-amber-300">ℹ️ Biaya tambahan admin sebesar <b>Rp 200</b> per transaksi untuk QRIS &amp; Sociabuzz.</div>
             </div>
         </div>
 
@@ -212,13 +840,57 @@
             </div>
             <p id="voucher-msg" class="text-xs mt-2 hidden"></p>
 
-            <div class="mt-3 pt-3 border-t border-slate-800/80 text-[11px] space-y-1">
+            <div class="mt-3 pt-3 border-t border-slate-800/80 text-[11px] space-y-1.5">
                 <p class="font-semibold text-slate-400">🎁 Voucher Aktif:</p>
                 <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
                     <span class="font-mono font-bold text-cyan-400">GENTZSTORETOPUPTERPERCAYA</span> - Diskon 5% (Kuota: <b id="quota-1">5</b>x)
                 </div>
                 <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
                     <span class="font-mono font-bold text-cyan-400">GENTZSTORE100%TERPERCAYA</span> - Diskon 10% (Kuota: <b id="quota-2">3</b>x)
+                </div>
+                <div id="spin-vouchers-list" class="space-y-1.5"></div>
+            </div>
+        </div>
+
+        <!-- FITUR SPIN HADIAH GENTZ STORE -->
+        <div class="card-box rounded-xl p-4 border border-cyan-500/40 space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">🎰</span>
+                    <h3 class="font-orbitron font-bold text-sm text-cyan-400">SPIN HADIAH GENTZ STORE</h3>
+                </div>
+                <span class="text-[10px] font-mono bg-slate-900 px-2 py-1 rounded border border-slate-700 text-slate-300">
+                    Top Up: <b id="topup-count-display" class="text-cyan-400">0</b>/50×
+                </span>
+            </div>
+
+            <div id="spin-display-box" class="bg-slate-900/90 border border-slate-700 rounded-lg p-4 text-center space-y-1">
+                <div id="spin-result-label" class="font-orbitron font-bold text-sm text-white">SIAP SPIN HADIAH!</div>
+                <div id="spin-result-sub" class="text-[11px] text-slate-400">Dapatkan voucher diskon otomatis untuk top up berikutnya</div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button id="btn-spin" onclick="triggerSparkle(this); spinReward()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-orbitron font-bold py-2.5 px-3 rounded-lg text-xs transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-dharmachakra"></i>
+                    <span>PUTAR SPIN (1×)</span>
+                </button>
+                <button id="btn-claim-50" onclick="triggerSparkle(this); claimMilestone50()" class="w-full bg-slate-800 border border-slate-700 text-slate-400 font-orbitron font-bold py-2.5 px-3 rounded-lg text-[11px] transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-crown text-amber-400"></i>
+                    <span id="btn-claim-50-text">KLAIM DISKON 50% (50×)</span>
+                </button>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-slate-400 space-y-1">
+                <div class="font-semibold text-slate-300">Aturan &amp; Peluang Menang:</div>
+                <div class="grid grid-cols-2 gap-1 font-mono text-[10px]">
+                    <div>• Diskon 1% → <span class="text-cyan-400">60%</span></div>
+                    <div>• Diskon 3% → <span class="text-cyan-400">30%</span></div>
+                    <div>• Diskon 5% → <span class="text-cyan-400">9%</span></div>
+                    <div>• Diskon 10% → <span class="text-cyan-400">1%</span></div>
+                </div>
+                <div class="text-[10px] text-amber-400/90 pt-0.5">• Diskon 50% → Khusus setelah melakukan top up sebanyak 50× di Gentz Store</div>
+                <div class="text-[10px] text-slate-500 pt-1">
+                    * Hasil spin acak sesuai persentase. Voucher hasil spin tersimpan otomatis &amp; langsung bisa dipakai saat top up berikutnya.
                 </div>
             </div>
         </div>
@@ -232,13 +904,19 @@
 
             <div class="grid grid-cols-2 gap-2">
                 <div onclick="triggerSparkle(this); selectAdmin(1)" id="card-admin-1" class="admin-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 transition-all">
-                    <div class="font-bold text-xs text-white">Admin 1</div>
-                    <div class="text-[10px] text-slate-400">14.00 - 17.00 WIB</div>
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-xs text-white">Admin 1</span>
+                        <span id="card-admin1-status" class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">OFFLINE</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">14.00 - 17.00 WIB</div>
                 </div>
 
                 <div onclick="triggerSparkle(this); selectAdmin(2)" id="card-admin-2" class="admin-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 transition-all">
-                    <div class="font-bold text-xs text-white">Admin 2</div>
-                    <div class="text-[10px] text-slate-400">17.00 - 22.00 WIB</div>
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-xs text-white">Admin 2</span>
+                        <span id="card-admin2-status" class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">OFFLINE</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">17.00 - 22.00 WIB</div>
                 </div>
             </div>
 
@@ -260,25 +938,1159 @@
                     <span class="text-slate-400">Admin Tujuan:</span>
                     <span id="sum-admin" class="text-cyan-400 font-semibold">Admin 1</span>
                 </div>
+                <div id="sum-discount-row" class="flex justify-between hidden">
+                    <span class="text-slate-400">Diskon Voucher:</span>
+                    <span id="sum-discount" class="text-emerald-400 font-semibold">-Rp 0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Biaya Admin (QRIS/SociaBuzz):</span>
+                    <span class="text-amber-300 font-semibold">+Rp 200</span>
+                </div>
                 <div class="border-t border-slate-800 pt-2 flex justify-between items-center">
                     <span class="font-bold text-white">Total Bayar:</span>
                     <span id="sum-total" class="font-orbitron font-bold text-base text-cyan-400">Rp 0</span>
                 </div>
             </div>
 
-            <button onclick="triggerSparkle(this); processCheckout()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold py-3 rounded-lg text-xs transition-colors flex items-center justify-center gap-2">
+            <!-- Peringatan Minimal Sociabuzz -->
+            <div id="topup-sociabuzz-warning" class="hidden bg-rose-500/15 border border-rose-500/50 rounded-lg p-2.5 text-xs text-rose-300 text-center">
+                ⚠️ Pembayaran via <b>SociaBuzz</b> memiliki minimal pembayaran <b>Rp 15.000</b>. Silakan pilih nominal ≥ Rp 15.000 atau gunakan <b>QRIS</b> (tanpa minimal).
+            </div>
+
+            <div id="login-required-warning" class="bg-amber-500/10 border border-amber-500/40 rounded-lg p-2.5 text-xs text-amber-300 text-center">
+                🔒 Anda harus <b>Login</b> terlebih dahulu (klik ikon 👤 di atas atau isi form akun) untuk melakukan Top-Up &amp; Cek Pesanan.
+            </div>
+
+            <button id="btn-checkout" onclick="triggerSparkle(this); processCheckout()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold py-3 rounded-lg text-xs transition-colors flex items-center justify-center gap-2">
                 <i class="fa-brands fa-whatsapp text-sm"></i>
                 BAYAR VIA WHATSAPP
             </button>
         </div>
 
+        <!-- 📋 FITUR CEK PESANAN & KELOLA STATUS -->
+        <div class="card-box rounded-xl p-4 border border-slate-800 space-y-3" id="order-tracking-section">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">📋</span>
+                    <h3 class="font-orbitron font-bold text-sm text-white" id="orders-section-title">CEK STATUS PESANAN</h3>
+                </div>
+                <span id="orders-count-badge" class="text-[10px] font-mono bg-slate-900 px-2 py-0.5 rounded border border-slate-700 text-cyan-400">0 Pesanan</span>
+            </div>
+
+            <div id="orders-locked-msg" class="bg-slate-900/80 border border-slate-800 rounded-lg p-4 text-center text-xs text-slate-400">
+                🔒 Silakan login untuk melihat daftar dan status pesanan Anda.
+            </div>
+
+            <div id="orders-list-container" class="hidden space-y-2.5"></div>
+        </div>
+
     </div>
 
-    <footer class="border-t border-slate-800 py-4 text-center text-[11px] text-slate-500">
-        &copy; 2026 Gentz Store. All rights reserved.
+    <!-- =====================================================================
+         HALAMAN 2: 🛒 BELI NOKOS (GAYA BIRU CERAH SEPERTI DESAIN PRICELIST)
+         ===================================================================== -->
+    <div id="page-nokos" class="hidden max-w-md md:max-w-4xl mx-auto w-full p-4 space-y-4">
+        
+        <!-- Header Pricelist Biru Cerah -->
+        <div class="nokos-bright-card rounded-2xl p-5 text-center text-white space-y-2">
+            <div class="inline-block bg-white/20 backdrop-blur-xs px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider uppercase border border-white/40">
+                📋 PRICELIST ALL NOKOS
+            </div>
+            <h2 class="font-orbitron text-2xl font-extrabold tracking-wider drop-shadow-sm">
+                NOKOS GENTZ STORE
+            </h2>
+            <div class="flex items-center justify-center gap-3 text-xs font-bold pt-1">
+                <span class="bg-sky-950/40 px-3 py-1 rounded-full border border-white/30">✅ 100% Aman</span>
+                <span class="bg-sky-950/40 px-3 py-1 rounded-full border border-white/30">⚡ Proses Cepat</span>
+            </div>
+        </div>
+
+        <!-- Banner Saluran WhatsApp Resmi di Halaman Nokos -->
+        <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-lg border-2 border-emerald-200 transition-all">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-slate-950 text-emerald-400 text-base flex items-center justify-center shrink-0">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div>
+                    <div class="font-orbitron font-extrabold text-xs">📢 SALURAN WHATSAPP RESMI GENTZ STORE</div>
+                    <div class="text-[11px] font-semibold">Klik untuk gabung saluran resmi (update stok &amp; promo nokos)</div>
+                </div>
+            </div>
+            <span class="bg-slate-950 text-emerald-400 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0">GABUNG</span>
+        </a>
+
+        <!-- Banner Peringatan Penting di Halaman Nokos -->
+        <div onclick="triggerSparkle(this); openRulesModal()" class="cursor-pointer bg-amber-400 text-slate-950 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-lg border-2 border-amber-200 transition-all">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-slate-950 text-amber-400 font-orbitron font-extrabold text-base flex items-center justify-center shrink-0">
+                    !
+                </div>
+                <div>
+                    <div class="font-orbitron font-extrabold text-xs">⚠️ BACA ATURAN SEBELUM MEMBAYAR</div>
+                    <div class="text-[11px] font-semibold">Cek nama resmi QRIS/SociaBuzz &amp; biaya admin Rp 200</div>
+                </div>
+            </div>
+            <span class="bg-slate-950 text-amber-400 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0">BUKA</span>
+        </div>
+
+        <!-- Tabel Pricelist Nokos Gaya Biru Cerah -->
+        <div class="nokos-table-wrap rounded-2xl overflow-hidden shadow-xl">
+            <div class="bg-sky-600 text-white px-4 py-2.5 flex items-center justify-between text-xs font-orbitron font-bold">
+                <span>DAFTAR HARGA NOMOR KOSONG (NOKOS)</span>
+                <span class="text-[10px] font-sans bg-white text-sky-700 px-2 py-0.5 rounded-full font-extrabold">KLIK PILIH</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-sky-500 text-white font-orbitron text-[11px] uppercase border-b-2 border-sky-300">
+                            <th class="py-2.5 px-3 w-12 text-center">NO</th>
+                            <th class="py-2.5 px-3">PLATFORM</th>
+                            <th class="py-2.5 px-3 text-right">HARGA</th>
+                            <th class="py-2.5 px-3 text-center w-20">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nokos-table-body" class="divide-y divide-sky-200 font-semibold"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Form Order Nokos Cepat -->
+        <div class="nokos-bright-card rounded-2xl p-4 text-white space-y-3" id="nokos-checkout-box">
+            <div class="flex items-center justify-between border-b border-white/30 pb-2">
+                <span class="font-orbitron font-bold text-xs">🛒 ORDER NOKOS TERPILIH</span>
+                <span id="nokos-selected-badge" class="bg-white text-sky-700 font-extrabold text-[11px] px-2.5 py-0.5 rounded-full">01 • Shopee</span>
+            </div>
+
+            <!-- Info Metode Pembayaran -->
+            <div class="bg-sky-950/35 rounded-xl p-2.5 text-[11px] space-y-1 border border-white/25">
+                <div class="font-bold text-yellow-200">💳 METODE PEMBAYARAN (+Biaya Admin Rp 200):</div>
+                <div>✅ <b>QRIS</b> — Tanpa minimal pembayaran</div>
+                <div>✅ <b>SociaBuzz</b> — Minimal pembayaran Rp 15.000</div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                <div>
+                    <label class="block text-[11px] font-bold text-sky-100 mb-1">Metode Pembayaran:</label>
+                    <select id="nokos-payment-select" onchange="validateNokosPayment()" class="w-full bg-white text-sky-950 font-bold rounded-lg px-3 py-2 text-xs focus:outline-none">
+                        <option value="QRIS">QRIS (Tanpa minimal)</option>
+                        <option value="SOCIABUZZ">SociaBuzz (Min. Rp 15.000)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-sky-100 mb-1">Pilih Admin Layanan:</label>
+                    <select id="nokos-admin-select" class="w-full bg-white text-sky-950 font-bold rounded-lg px-3 py-2 text-xs focus:outline-none">
+                        <option value="1">Admin 1 (14.00 - 17.00 WIB)</option>
+                        <option value="2">Admin 2 (17.00 - 22.00 WIB)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Peringatan Minimal Sociabuzz untuk Nokos -->
+            <div id="nokos-sociabuzz-warning" class="hidden bg-rose-600/90 border border-white/40 rounded-xl p-2.5 text-[11px] text-white font-semibold text-center">
+                ⚠️ Pembayaran via <b>SociaBuzz</b> memerlukan minimal pembayaran <b>Rp 15.000</b>. Untuk transaksi di bawah Rp 15.000, silakan pilih <b>QRIS</b> (tanpa minimal).
+            </div>
+
+            <div class="bg-sky-950/35 rounded-xl p-3 flex items-center justify-between border border-white/25">
+                <div>
+                    <div class="text-[11px] text-sky-100">Total Pembayaran Nokos (termasuk admin Rp 200):</div>
+                    <div id="nokos-selected-name" class="font-bold text-sm text-white">Shopee (No. 01)</div>
+                </div>
+                <div id="nokos-selected-price" class="font-orbitron font-extrabold text-lg text-yellow-300">Rp 1.200</div>
+            </div>
+
+            <button onclick="triggerSparkle(this); processNokosCheckout()" class="w-full bg-white hover:bg-sky-50 text-sky-700 font-orbitron font-extrabold py-3 rounded-xl text-xs shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i>
+                <span>BELI NOKOS VIA WHATSAPP</span>
+            </button>
+
+            <button onclick="triggerSparkle(this); switchPage('topup')" class="w-full bg-sky-950/40 hover:bg-sky-950/60 text-white font-bold py-2 rounded-xl text-[11px] border border-white/25 transition-all">
+                ← Kembali ke Halaman Top Up Game
+            </button>
+        </div>
+
+    </div>
+
+    <footer class="border-t border-slate-800 py-4 text-center text-[11px] text-slate-500 space-y-1.5">
+        <div>
+            <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline font-semibold">
+                <i class="fa-brands fa-whatsapp"></i> Saluran WhatsApp Resmi Gentz Store
+            </a>
+        </div>
+        <div>&copy; 2026 Gentz Store. All rights reserved.</div>
     </footer>
 
     <script>
+        const ADMIN_TRANSACTION_FEE = 200;
+
+
+        // ==========================================
+        // 📊 FITUR STATISTIK GENTZ STORE
+        // ==========================================
+        function updateStoreStatistics() {
+            const registeredUsers = getRegisteredUsers();
+            const totalAccounts = Object.keys(registeredUsers).length;
+
+            const allOrders = getAllOrders();
+            const completedOrders = allOrders.filter(o => o.status === "Selesai");
+            const totalBuyers = completedOrders.length;
+
+            const accEl = document.getElementById('stat-total-accounts');
+            const buyEl = document.getElementById('stat-total-buyers');
+            if (accEl) accEl.innerText = totalAccounts.toLocaleString('id-ID');
+            if (buyEl) buyEl.innerText = totalBuyers.toLocaleString('id-ID');
+        }
+
+        // ==========================================
+        // 0. MODAL ATURAN (!) & SALURAN WHATSAPP (📢)
+        // ==========================================
+        function openRulesModal() {
+            closeAllDrawers();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('rules-modal').classList.remove('hidden');
+        }
+
+        function openChannelModal() {
+            closeAllDrawers();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('channel-modal').classList.remove('hidden');
+        }
+
+        // ==========================================
+        // 1. SISTEM OBROLAN BANTUAN / LAYANAN PELANGGAN (IN-SITE)
+        // ==========================================
+        let selectedOwnerChatThread = null;
+
+        function getHelpChats() {
+            return JSON.parse(localStorage.getItem('gentz_help_chats') || '{}');
+        }
+
+        function setHelpChats(chats) {
+            localStorage.setItem('gentz_help_chats', JSON.stringify(chats));
+        }
+
+        function getVisitorChatId() {
+            const user = getCurrentUser();
+            if (user) return `user_${user.username}`;
+            let guestId = localStorage.getItem('gentz_guest_chat_id');
+            if (!guestId) {
+                guestId = `Tamu_${Math.floor(1000 + Math.random() * 9000)}`;
+                localStorage.setItem('gentz_guest_chat_id', guestId);
+            }
+            return `guest_${guestId}`;
+        }
+
+        function getVisitorDisplayName() {
+            const user = getCurrentUser();
+            if (user) return user.username;
+            const customName = document.getElementById('chat-guest-name') ? document.getElementById('chat-guest-name').value.trim() : '';
+            if (customName) return customName;
+            const guestId = localStorage.getItem('gentz_guest_chat_id') || 'Tamu';
+            return guestId;
+        }
+
+        function openHelpChat() {
+            closeAllDrawers();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('help-chat-modal').classList.remove('hidden');
+            renderHelpChatUI();
+        }
+
+        function renderHelpChatUI() {
+            const user = getCurrentUser();
+            const restrictedView = document.getElementById('chat-admin-restricted');
+            const buyerView = document.getElementById('chat-buyer-view');
+            const ownerView = document.getElementById('chat-owner-view');
+            const subtitle = document.getElementById('chat-header-subtitle');
+
+            restrictedView.classList.add('hidden');
+            buyerView.classList.add('hidden');
+            ownerView.classList.add('hidden');
+
+            if (user && user.role === 'ADMIN') {
+                restrictedView.classList.remove('hidden');
+                subtitle.innerText = "Akses Terbatas";
+                return;
+            }
+
+            if (user && user.role === 'OWNER') {
+                ownerView.classList.remove('hidden');
+                subtitle.innerText = "Mode Owner • Balas Pesan Pelanggan";
+                renderOwnerChatThreads();
+                return;
+            }
+
+            buyerView.classList.remove('hidden');
+            subtitle.innerText = "Obrolan Langsung di Dalam Situs";
+            const guestNameBox = document.getElementById('guest-name-box');
+            if (!user) {
+                guestNameBox.classList.remove('hidden');
+            } else {
+                guestNameBox.classList.add('hidden');
+            }
+            renderBuyerChatMessages();
+        }
+
+        function renderBuyerChatMessages() {
+            const chatId = getVisitorChatId();
+            const allChats = getHelpChats();
+            const thread = allChats[chatId];
+            const container = document.getElementById('buyer-chat-messages');
+            const statusText = document.getElementById('buyer-chat-status-text');
+
+            container.innerHTML = `
+                <div class="flex flex-col items-start">
+                    <div class="bg-slate-800 border border-slate-700 text-slate-200 rounded-2xl rounded-tl-xs px-3.5 py-2.5 text-xs max-w-[85%]">
+                        Halo! Selamat datang di Layanan Pelanggan <b>Gentz Store</b>. Silakan tulis pertanyaan atau kendala Anda di bawah ini. Semua obrolan dilakukan langsung di dalam situs tanpa perlu membuka WhatsApp.
+                    </div>
+                    <span class="text-[9px] text-slate-500 mt-1 ml-1">Sistem Gentz Store</span>
+                </div>
+            `;
+
+            if (!thread || !thread.messages || thread.messages.length === 0) {
+                statusText.className = "font-semibold text-cyan-400";
+                statusText.innerText = "Siap membantu Anda";
+                return;
+            }
+
+            thread.messages.forEach(m => {
+                const isOwner = m.senderRole === 'OWNER';
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex flex-col ${isOwner ? 'items-start' : 'items-end'}`;
+                if (isOwner) {
+                    msgDiv.innerHTML = `
+                        <div class="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 text-amber-100 rounded-2xl rounded-tl-xs px-3.5 py-2.5 text-xs max-w-[85%]">
+                            <div class="text-[10px] font-bold text-amber-300 mb-0.5">👑 Owner Gentz Store</div>
+                            <div>${m.text}</div>
+                        </div>
+                        <span class="text-[9px] text-slate-500 mt-1 ml-1">${m.time}</span>
+                    `;
+                } else {
+                    msgDiv.innerHTML = `
+                        <div class="bg-cyan-600 text-white rounded-2xl rounded-tr-xs px-3.5 py-2.5 text-xs max-w-[85%]">
+                            ${m.text}
+                        </div>
+                        <span class="text-[9px] text-slate-500 mt-1 mr-1">${m.time}</span>
+                    `;
+                }
+                container.appendChild(msgDiv);
+            });
+
+            if (thread.waitingForOwner) {
+                statusText.className = "font-semibold text-amber-300 animate-pulse";
+                statusText.innerText = "⏳ Menunggu balasan admin...";
+
+                const waitBubble = document.createElement('div');
+                waitBubble.className = "text-center pt-1";
+                waitBubble.innerHTML = `
+                    <span class="inline-block bg-amber-500/15 border border-amber-500/40 text-amber-300 text-[10px] font-semibold px-3 py-1 rounded-full">
+                        ⏳ Menunggu balasan admin...
+                    </span>
+                `;
+                container.appendChild(waitBubble);
+            } else {
+                statusText.className = "font-semibold text-emerald-400";
+                statusText.innerText = "✅ Dibalas oleh Owner";
+            }
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendBuyerChatMessage() {
+            const user = getCurrentUser();
+            if (user && (user.role === 'ADMIN' || user.role === 'OWNER')) return;
+
+            const inputEl = document.getElementById('buyer-chat-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            const chatId = getVisitorChatId();
+            const displayName = getVisitorDisplayName();
+            const allChats = getHelpChats();
+
+            if (!allChats[chatId]) {
+                allChats[chatId] = {
+                    chatId: chatId,
+                    senderName: displayName,
+                    waitingForOwner: true,
+                    messages: []
+                };
+            } else {
+                allChats[chatId].senderName = displayName;
+                allChats[chatId].waitingForOwner = true;
+            }
+
+            const nowTime = new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' }) + ' WIB';
+            allChats[chatId].messages.push({
+                senderRole: 'BUYER',
+                senderName: displayName,
+                text: text,
+                time: nowTime
+            });
+
+            setHelpChats(allChats);
+            inputEl.value = '';
+            renderBuyerChatMessages();
+            updateChatNotificationBadge();
+        }
+
+        function renderOwnerChatThreads() {
+            const allChats = getHelpChats();
+            const threadKeys = Object.keys(allChats);
+            const listEl = document.getElementById('owner-thread-list');
+            const countEl = document.getElementById('owner-thread-count');
+            const msgContainer = document.getElementById('owner-chat-messages');
+
+            countEl.innerText = `${threadKeys.length} Obrolan`;
+            listEl.innerHTML = '';
+
+            if (threadKeys.length === 0) {
+                listEl.innerHTML = `<span class="text-[11px] text-slate-400">Belum ada pembeli yang mengirim pesan.</span>`;
+                msgContainer.innerHTML = `<div class="text-center text-xs text-slate-400 py-8">Belum ada pesan masuk dari pembeli.</div>`;
+                return;
+            }
+
+            if (!selectedOwnerChatThread || !allChats[selectedOwnerChatThread]) {
+                selectedOwnerChatThread = threadKeys[threadKeys.length - 1];
+            }
+
+            threadKeys.forEach(key => {
+                const t = allChats[key];
+                const isSelected = key === selectedOwnerChatThread;
+                const btn = document.createElement('button');
+                btn.className = `px-3 py-1.5 rounded-lg text-[11px] font-bold whitespace-nowrap flex items-center gap-1.5 cursor-pointer border transition-all ${
+                    isSelected
+                        ? 'bg-amber-400 text-slate-950 border-amber-300'
+                        : 'bg-slate-800 text-slate-200 border-slate-700 hover:border-amber-400'
+                }`;
+                btn.onclick = () => {
+                    selectedOwnerChatThread = key;
+                    renderOwnerChatThreads();
+                };
+                btn.innerHTML = `
+                    <span>${t.senderName}</span>
+                    ${t.waitingForOwner ? '<span class="w-2 h-2 rounded-full bg-rose-500"></span>' : ''}
+                `;
+                listEl.appendChild(btn);
+            });
+
+            const activeThread = allChats[selectedOwnerChatThread];
+            msgContainer.innerHTML = '';
+            activeThread.messages.forEach(m => {
+                const isOwner = m.senderRole === 'OWNER';
+                const div = document.createElement('div');
+                div.className = `flex flex-col ${isOwner ? 'items-end' : 'items-start'}`;
+                if (isOwner) {
+                    div.innerHTML = `
+                        <div class="bg-amber-500/25 border border-amber-400/50 text-amber-100 rounded-2xl rounded-tr-xs px-3.5 py-2 text-xs max-w-[85%]">
+                            <div class="text-[10px] font-bold text-amber-300 mb-0.5">👑 Balasan Anda (Owner)</div>
+                            <div>${m.text}</div>
+                        </div>
+                        <span class="text-[9px] text-slate-500 mt-1 mr-1">${m.time}</span>
+                    `;
+                } else {
+                    div.innerHTML = `
+                        <div class="bg-slate-800 border border-slate-700 text-white rounded-2xl rounded-tl-xs px-3.5 py-2 text-xs max-w-[85%]">
+                            <div class="text-[10px] font-bold text-cyan-400 mb-0.5">👤 ${m.senderName}</div>
+                            <div>${m.text}</div>
+                        </div>
+                        <span class="text-[9px] text-slate-500 mt-1 ml-1">${m.time}</span>
+                    `;
+                }
+                msgContainer.appendChild(div);
+            });
+
+            if (activeThread.waitingForOwner) {
+                const statusInfo = document.createElement('div');
+                statusInfo.className = "text-center pt-1";
+                statusInfo.innerHTML = `<span class="text-[10px] text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 rounded-full">Pembeli sedang melihat status: "Menunggu balasan admin..."</span>`;
+                msgContainer.appendChild(statusInfo);
+            }
+
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+        }
+
+        function sendOwnerReplyMessage() {
+            const user = getCurrentUser();
+            if (!user || user.role !== 'OWNER') {
+                alert("Hanya akun Owner yang dapat membalas pesan pelanggan!");
+                return;
+            }
+            if (!selectedOwnerChatThread) return;
+
+            const inputEl = document.getElementById('owner-chat-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            const allChats = getHelpChats();
+            if (!allChats[selectedOwnerChatThread]) return;
+
+            const nowTime = new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' }) + ' WIB';
+            allChats[selectedOwnerChatThread].messages.push({
+                senderRole: 'OWNER',
+                senderName: user.username,
+                text: text,
+                time: nowTime
+            });
+            allChats[selectedOwnerChatThread].waitingForOwner = false;
+
+            setHelpChats(allChats);
+            inputEl.value = '';
+            renderOwnerChatThreads();
+            updateChatNotificationBadge();
+        }
+
+        function updateChatNotificationBadge() {
+            const user = getCurrentUser();
+            const allChats = getHelpChats();
+            const navBadge = document.getElementById('nav-chat-badge');
+            const floatDot = document.getElementById('floating-chat-dot');
+
+            if (user && user.role === 'OWNER') {
+                const unreadCount = Object.values(allChats).filter(t => t.waitingForOwner).length;
+                if (unreadCount > 0) {
+                    navBadge.innerText = unreadCount;
+                    navBadge.classList.remove('hidden');
+                    floatDot.classList.remove('hidden');
+                } else {
+                    navBadge.classList.add('hidden');
+                    floatDot.classList.add('hidden');
+                }
+            } else {
+                navBadge.classList.add('hidden');
+                floatDot.classList.add('hidden');
+            }
+        }
+
+        // ==========================================
+        // 2. DATA PRICELIST NOKOS TERBARU
+        // ==========================================
+        const nokosData = [
+            { id: "nks-1", no: "01", platform: "Shopee", price: 1000 },
+            { id: "nks-2", no: "02", platform: "Lazada", price: 1000 },
+            { id: "nks-3", no: "03", platform: "Tokopedia", price: 1500 },
+            { id: "nks-4", no: "04", platform: "Gojek", price: 4000 },
+            { id: "nks-5", no: "05", platform: "Grab", price: 1000 },
+            { id: "nks-6", no: "06", platform: "WhatsApp", price: 4500 },
+            { id: "nks-7", no: "07", platform: "Telegram", price: 4500 },
+            { id: "nks-8", no: "08", platform: "TikTok", price: 1000 },
+            { id: "nks-9", no: "09", platform: "Instagram", price: 1200 },
+            { id: "nks-10", no: "09", platform: "Twitter", price: 1000 },
+            { id: "nks-11", no: "10", platform: "Netflix", price: 1000 },
+            { id: "nks-12", no: "11", platform: "Spotify", price: 2100 }
+        ];
+
+        let selectedNokos = nokosData[0];
+
+        function renderNokosTable() {
+            const tbody = document.getElementById('nokos-table-body');
+            tbody.innerHTML = '';
+
+            nokosData.forEach(item => {
+                const isSelected = selectedNokos && selectedNokos.id === item.id;
+                const tr = document.createElement('tr');
+                tr.className = `nokos-row cursor-pointer transition-colors ${isSelected ? 'bg-sky-200 font-extrabold' : ''}`;
+                tr.onclick = function() {
+                    triggerSparkle(this);
+                    selectNokosItem(item);
+                };
+
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 text-center font-mono text-sky-800">${item.no}</td>
+                    <td class="py-2.5 px-3 text-sky-950">${item.platform}</td>
+                    <td class="py-2.5 px-3 text-right font-mono text-sky-700 font-bold">Rp ${item.price.toLocaleString('id-ID')}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isSelected ? 'bg-sky-600 text-white' : 'bg-sky-100 text-sky-700 border border-sky-300'}">
+                            ${isSelected ? 'Dipilih' : 'Pilih'}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function selectNokosItem(item) {
+            selectedNokos = item;
+            const totalWithFee = item.price + ADMIN_TRANSACTION_FEE;
+            document.getElementById('nokos-selected-badge').innerText = `${item.no} • ${item.platform}`;
+            document.getElementById('nokos-selected-name').innerText = `${item.platform} (No. ${item.no})`;
+            document.getElementById('nokos-selected-price').innerText = `Rp ${totalWithFee.toLocaleString('id-ID')}`;
+            renderNokosTable();
+            validateNokosPayment();
+        }
+
+        function validateNokosPayment() {
+            const payment = document.getElementById('nokos-payment-select').value;
+            const warnEl = document.getElementById('nokos-sociabuzz-warning');
+            const totalWithFee = selectedNokos ? (selectedNokos.price + ADMIN_TRANSACTION_FEE) : 0;
+            if (payment === 'SOCIABUZZ' && totalWithFee < 15000) {
+                warnEl.classList.remove('hidden');
+                return false;
+            } else {
+                warnEl.classList.add('hidden');
+                return true;
+            }
+        }
+
+        function processNokosCheckout() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                alert("🔒 Anda wajib login terlebih dahulu (klik ikon 👤 di pojok kanan atas) untuk memesan Nokos!");
+                toggleDrawer('account-drawer');
+                return;
+            }
+
+            if (!selectedNokos) return;
+
+            const payment = document.getElementById('nokos-payment-select').value;
+            const totalWithFee = selectedNokos.price + ADMIN_TRANSACTION_FEE;
+            if (payment === 'SOCIABUZZ' && totalWithFee < 15000) {
+                alert("⚠️ Pembayaran via SociaBuzz minimal Rp 15.000! Silakan pilih metode pembayaran QRIS (tanpa minimal pembayaran).");
+                return;
+            }
+
+            const adminNum = document.getElementById('nokos-admin-select').value;
+            const orderId = `NKS-${Math.floor(100000 + Math.random() * 900000)}`;
+            const nowStr = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta', hour12: false });
+
+            const allOrders = getAllOrders();
+            allOrders.push({
+                id: orderId,
+                buyerUsername: currentUser.username,
+                game: "Beli Nokos",
+                gameAccount: `No. ${selectedNokos.no}`,
+                item: `Nokos ${selectedNokos.platform}`,
+                payment: payment,
+                adminTarget: adminNum,
+                total: totalWithFee,
+                status: "Masih Diproses",
+                createdAt: `${nowStr} WIB`
+            });
+            setAllOrders(allOrders);
+            renderOrdersList();
+
+            const officialReceiver = payment === 'QRIS'
+                ? "Gentz Store Coach Arfie, Cikarang, Kesehatan & Olahraga"
+                : "Gentz Store / gentza201414";
+
+            let msg = ` Halo Admin ${adminNum} (Gentz Store),
+Saya ingin membeli NOKOS dengan detail berikut:
+
+`;
+            msg += ` Kode Pesanan: ${orderId}
+`;
+            msg += ` Akun Pembeli: ${currentUser.username}
+`;
+            msg += ` Layanan: Beli Nokos Gentz Store
+`;
+            msg += ` Platform: ${selectedNokos.platform} (No. ${selectedNokos.no})
+`;
+            msg += ` Pembayaran: ${payment} (${officialReceiver})
+`;
+            msg += ` Harga Item: Rp ${selectedNokos.price.toLocaleString('id-ID')}
+`;
+            msg += ` Biaya Admin: Rp ${ADMIN_TRANSACTION_FEE.toLocaleString('id-ID')}
+`;
+            msg += ` Total Bayar: Rp ${totalWithFee.toLocaleString('id-ID')}
+
+`;
+            msg += `Mohon segera diproses. Terima kasih!`;
+
+            const phone = adminNumbers[adminNum];
+            const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // ==========================================
+        // 3. NAVIGASI HALAMAN & DRAWER ATAS (☰, 📢, !, ❓, 👤, 🔔)
+        // ==========================================
+        function switchPage(pageName) {
+            const pageTopup = document.getElementById('page-topup');
+            const pageNokos = document.getElementById('page-nokos');
+            const navTitle = document.getElementById('nav-center-title');
+            const btnMenuTopup = document.getElementById('menu-btn-topup');
+            const btnMenuNokos = document.getElementById('menu-btn-nokos');
+
+            if (pageName === 'nokos') {
+                pageTopup.classList.add('hidden');
+                pageNokos.classList.remove('hidden');
+                navTitle.innerText = "Beli Nokos";
+
+                btnMenuNokos.className = "w-full text-left p-3 rounded-xl border border-sky-400 bg-sky-500/20 text-white font-bold text-xs flex items-center justify-between transition-all";
+                btnMenuTopup.className = "w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:border-cyan-500 text-white font-bold text-xs flex items-center justify-between transition-all";
+            } else {
+                pageNokos.classList.add('hidden');
+                pageTopup.classList.remove('hidden');
+                navTitle.innerText = "Home";
+
+                btnMenuTopup.className = "w-full text-left p-3 rounded-xl border border-cyan-500 bg-cyan-500/15 text-white font-bold text-xs flex items-center justify-between transition-all";
+                btnMenuNokos.className = "w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:border-sky-400 text-white font-bold text-xs flex items-center justify-between transition-all";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleDrawer(drawerId) {
+            const target = document.getElementById(drawerId);
+            const isHidden = target.classList.contains('hidden');
+            closeAllDrawers();
+            if (isHidden) {
+                document.getElementById('drawer-backdrop').classList.remove('hidden');
+                target.classList.remove('hidden');
+                updateAuthUI();
+                renderOrdersList();
+            }
+        }
+
+        function closeAllDrawers() {
+            document.getElementById('drawer-backdrop').classList.add('hidden');
+            document.getElementById('menu-drawer').classList.add('hidden');
+            document.getElementById('account-drawer').classList.add('hidden');
+            document.getElementById('orders-drawer').classList.add('hidden');
+            document.getElementById('help-chat-modal').classList.add('hidden');
+            document.getElementById('rules-modal').classList.add('hidden');
+            document.getElementById('channel-modal').classList.add('hidden');
+        }
+
+        function switchDrawerAuthTab(tab) {
+            const tLogin = document.getElementById('d-tab-login');
+            const tReg = document.getElementById('d-tab-register');
+            const fLogin = document.getElementById('d-form-login');
+            const fReg = document.getElementById('d-form-register');
+            document.getElementById('d-auth-msg').classList.add('hidden');
+
+            if (tab === 'login') {
+                tLogin.className = "bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs";
+                tReg.className = "bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs";
+                fLogin.classList.remove('hidden');
+                fReg.classList.add('hidden');
+            } else {
+                tReg.className = "bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs";
+                tLogin.className = "bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs";
+                fReg.classList.remove('hidden');
+                fLogin.classList.add('hidden');
+            }
+        }
+
+        function handleDrawerRegister() {
+            const u = document.getElementById('d-reg-username').value.trim();
+            const p = document.getElementById('d-reg-password').value;
+            const msg = document.getElementById('d-auth-msg');
+
+            if (!u || !p) {
+                msg.className = "text-xs font-semibold text-rose-400";
+                msg.innerText = "❌ Username dan Password wajib diisi!";
+                msg.classList.remove('hidden');
+                return;
+            }
+            const users = getRegisteredUsers();
+            if (Object.prototype.hasOwnProperty.call(systemAccounts, u) || Object.prototype.hasOwnProperty.call(users, u)) {
+                msg.className = "text-xs font-semibold text-rose-400";
+                msg.innerText = "❌ Username sudah terdaftar, silakan pilih yang lain";
+                msg.classList.remove('hidden');
+                return;
+            }
+            users[u] = { password: p, role: "USER", label: "👤 PENGGUNA" };
+            setRegisteredUsers(users);
+            updateStoreStatistics();
+            document.getElementById('d-reg-username').value = '';
+            document.getElementById('d-reg-password').value = '';
+            switchDrawerAuthTab('login');
+            msg.className = "text-xs font-semibold text-emerald-400";
+            msg.innerText = "✅ Pendaftaran berhasil! Silakan login dengan akun Anda";
+            msg.classList.remove('hidden');
+        }
+
+        function handleDrawerLogin() {
+            const u = document.getElementById('d-login-username').value.trim();
+            const p = document.getElementById('d-login-password').value;
+            const msg = document.getElementById('d-auth-msg');
+
+            if (Object.prototype.hasOwnProperty.call(systemAccounts, u) && systemAccounts[u].password === p) {
+                setCurrentUser({ username: u, role: systemAccounts[u].role, label: systemAccounts[u].label });
+                document.getElementById('d-login-username').value = '';
+                document.getElementById('d-login-password').value = '';
+                updateAuthUI();
+                return;
+            }
+            const users = getRegisteredUsers();
+            if (Object.prototype.hasOwnProperty.call(users, u) && users[u].password === p) {
+                setCurrentUser({ username: u, role: "USER", label: "👤 PENGGUNA" });
+                document.getElementById('d-login-username').value = '';
+                document.getElementById('d-login-password').value = '';
+                updateAuthUI();
+                return;
+            }
+            msg.className = "text-xs font-semibold text-rose-400";
+            msg.innerText = "❌ Username atau Password salah, silakan coba lagi";
+            msg.classList.remove('hidden');
+        }
+
+        // ==========================================
+        // 4. KONFIGURASI AKUN SISTEM (OWNER & ADMIN)
+        // ==========================================
+        const systemAccounts = {
+            "Gentzamilby": {
+                password: "Gentza graziano milby",
+                role: "OWNER",
+                label: "👑 OWNER"
+            },
+            "reman": {
+                password: "remanman110",
+                role: "ADMIN",
+                label: "🛡️ ADMIN 1"
+            },
+            "Arcxiv334": {
+                password: "Arc772",
+                role: "ADMIN",
+                label: "🛡️ ADMIN 2"
+            }
+        };
+
+        function getRegisteredUsers() {
+            return JSON.parse(localStorage.getItem('gentz_registered_users') || '{}');
+        }
+
+        function setRegisteredUsers(users) {
+            localStorage.setItem('gentz_registered_users', JSON.stringify(users));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('gentz_current_user') || 'null');
+        }
+
+        function setCurrentUser(userObj) {
+            if (userObj) {
+                localStorage.setItem('gentz_current_user', JSON.stringify(userObj));
+            } else {
+                localStorage.removeItem('gentz_current_user');
+            }
+        }
+
+        function getAllOrders() {
+            return JSON.parse(localStorage.getItem('gentz_orders') || '[]');
+        }
+
+        function setAllOrders(orders) {
+            localStorage.setItem('gentz_orders', JSON.stringify(orders));
+        }
+
+        function switchAuthTab(tab) {
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            const authMsg = document.getElementById('auth-msg');
+
+            authMsg.classList.add('hidden');
+
+            if (tab === 'login') {
+                tabLogin.className = "bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all";
+                tabRegister.className = "bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all";
+                formLogin.classList.remove('hidden');
+                formRegister.classList.add('hidden');
+            } else {
+                tabRegister.className = "bg-cyan-500 text-slate-950 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all";
+                tabLogin.className = "bg-slate-900 border border-slate-700 text-slate-300 font-orbitron font-bold py-1.5 rounded-lg text-xs transition-all";
+                formRegister.classList.remove('hidden');
+                formLogin.classList.add('hidden');
+            }
+        }
+
+        function handleRegister() {
+            const username = document.getElementById('reg-username').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const authMsg = document.getElementById('auth-msg');
+
+            if (!username || !password) {
+                authMsg.className = "text-xs font-semibold text-rose-400";
+                authMsg.innerText = "❌ Username dan Password wajib diisi!";
+                authMsg.classList.remove('hidden');
+                return;
+            }
+
+            const registeredUsers = getRegisteredUsers();
+            const isSystemAccount = Object.prototype.hasOwnProperty.call(systemAccounts, username);
+            const isUserAccount = Object.prototype.hasOwnProperty.call(registeredUsers, username);
+
+            if (isSystemAccount || isUserAccount) {
+                authMsg.className = "text-xs font-semibold text-rose-400";
+                authMsg.innerText = "❌ Username sudah terdaftar, silakan pilih yang lain";
+                authMsg.classList.remove('hidden');
+                return;
+            }
+
+            registeredUsers[username] = {
+                password: password,
+                role: "USER",
+                label: "👤 PENGGUNA"
+            };
+            setRegisteredUsers(registeredUsers);
+            updateStoreStatistics();
+
+            document.getElementById('reg-username').value = '';
+            document.getElementById('reg-password').value = '';
+
+            switchAuthTab('login');
+            authMsg.className = "text-xs font-semibold text-emerald-400";
+            authMsg.innerText = "✅ Pendaftaran berhasil! Silakan login dengan akun Anda";
+            authMsg.classList.remove('hidden');
+        }
+
+        function handleLogin() {
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            const authMsg = document.getElementById('auth-msg');
+
+            if (!username || !password) {
+                authMsg.className = "text-xs font-semibold text-rose-400";
+                authMsg.innerText = "❌ Username atau Password salah, silakan coba lagi";
+                authMsg.classList.remove('hidden');
+                return;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(systemAccounts, username)) {
+                if (systemAccounts[username].password === password) {
+                    setCurrentUser({
+                        username: username,
+                        role: systemAccounts[username].role,
+                        label: systemAccounts[username].label
+                    });
+                    document.getElementById('login-username').value = '';
+                    document.getElementById('login-password').value = '';
+                    updateAuthUI();
+                    return;
+                }
+            }
+
+            const registeredUsers = getRegisteredUsers();
+            if (Object.prototype.hasOwnProperty.call(registeredUsers, username)) {
+                if (registeredUsers[username].password === password) {
+                    setCurrentUser({
+                        username: username,
+                        role: "USER",
+                        label: "👤 PENGGUNA"
+                    });
+                    document.getElementById('login-username').value = '';
+                    document.getElementById('login-password').value = '';
+                    updateAuthUI();
+                    return;
+                }
+            }
+
+            authMsg.className = "text-xs font-semibold text-rose-400";
+            authMsg.innerText = "❌ Username atau Password salah, silakan coba lagi";
+            authMsg.classList.remove('hidden');
+        }
+
+        function logoutUser() {
+            setCurrentUser(null);
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            const user = getCurrentUser();
+            const formsContainer = document.getElementById('auth-forms-container');
+            const loggedInPanel = document.getElementById('auth-logged-in-panel');
+            const btnLogout = document.getElementById('btn-logout');
+            const topBadge = document.getElementById('user-badge-top');
+            const loginWarning = document.getElementById('login-required-warning');
+            const btnCheckout = document.getElementById('btn-checkout');
+
+            const dLoggedIn = document.getElementById('drawer-logged-in');
+            const dLoggedOut = document.getElementById('drawer-logged-out');
+            const navUserDot = document.getElementById('nav-user-dot');
+
+            if (user) {
+                formsContainer.classList.add('hidden');
+                loggedInPanel.classList.remove('hidden');
+                btnLogout.classList.remove('hidden');
+                loginWarning.classList.add('hidden');
+                dLoggedIn.classList.remove('hidden');
+                dLoggedOut.classList.add('hidden');
+                navUserDot.classList.remove('hidden');
+
+                document.getElementById('welcome-user-text').innerText = `✅ Berhasil masuk! Selamat datang, ${user.username}`;
+                document.getElementById('user-role-badge').innerText = user.label;
+                document.getElementById('drawer-acc-username').innerText = user.username;
+                document.getElementById('drawer-acc-role').innerText = user.label;
+
+                if (user.role === 'OWNER') {
+                    document.getElementById('user-access-desc').innerText = "Hak Akses Owner: Lihat & balas obrolan pelanggan, kelola semua pesanan (Masih Diproses ↔ Selesai)";
+                    topBadge.innerHTML = `<span class="text-amber-400 font-bold">${user.label}: ${user.username}</span>`;
+                } else if (user.role === 'ADMIN') {
+                    document.getElementById('user-access-desc').innerText = "Hak Akses Admin: Lihat semua pesanan & ubah status pesanan (Masih Diproses ↔ Selesai)";
+                    topBadge.innerHTML = `<span class="text-amber-400 font-bold">${user.label}: ${user.username}</span>`;
+                } else {
+                    document.getElementById('user-access-desc').innerText = "Akses: Top Up Game, Beli Nokos, Cek Pesanan, Bantuan Live Chat & Voucher";
+                    topBadge.innerHTML = `<span class="text-cyan-400 font-bold">${user.label}: ${user.username}</span>`;
+                }
+
+                btnCheckout.className = "w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold py-3 rounded-lg text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer";
+            } else {
+                formsContainer.classList.remove('hidden');
+                loggedInPanel.classList.add('hidden');
+                btnLogout.classList.add('hidden');
+                loginWarning.classList.remove('hidden');
+                dLoggedIn.classList.add('hidden');
+                dLoggedOut.classList.remove('hidden');
+                navUserDot.classList.add('hidden');
+                topBadge.innerHTML = `<span class="text-slate-400">Belum Login</span>`;
+
+                btnCheckout.className = "w-full bg-slate-800 border border-slate-700 text-slate-400 font-orbitron font-bold py-3 rounded-lg text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer";
+            }
+
+            renderOrdersList();
+            updateChatNotificationBadge();
+        }
+
+        function renderOrdersList() {
+            const user = getCurrentUser();
+            const lockedMsg = document.getElementById('orders-locked-msg');
+            const listContainer = document.getElementById('orders-list-container');
+            const titleEl = document.getElementById('orders-section-title');
+            const countBadge = document.getElementById('orders-count-badge');
+
+            const dLocked = document.getElementById('drawer-orders-locked');
+            const dList = document.getElementById('drawer-orders-list');
+            const dTitle = document.getElementById('drawer-orders-title');
+            const bellBadge = document.getElementById('nav-bell-badge');
+            const accHistoryCount = document.getElementById('drawer-acc-history-count');
+            const accHistoryList = document.getElementById('drawer-acc-history-list');
+
+            if (!user) {
+                lockedMsg.classList.remove('hidden');
+                listContainer.classList.add('hidden');
+                titleEl.innerText = "CEK STATUS PESANAN";
+                countBadge.innerText = "0 Pesanan";
+
+                dLocked.classList.remove('hidden');
+                dList.classList.add('hidden');
+                bellBadge.classList.add('hidden');
+                return;
+            }
+
+            lockedMsg.classList.add('hidden');
+            listContainer.classList.remove('hidden');
+            dLocked.classList.add('hidden');
+            dList.classList.remove('hidden');
+
+            const allOrders = getAllOrders();
+            const isPrivileged = (user.role === 'OWNER' || user.role === 'ADMIN');
+
+            const visibleOrders = isPrivileged
+                ? allOrders
+                : allOrders.filter(o => o.buyerUsername === user.username);
+
+            titleEl.innerText = isPrivileged ? "KELOLA SEMUA PESANAN (OWNER/ADMIN)" : "CEK PESANAN SAYA";
+            dTitle.innerText = isPrivileged ? "🔔 SEMUA PESANAN (ADMIN/OWNER)" : "🔔 PESANAN SAYA";
+            countBadge.innerText = `${visibleOrders.length} Pesanan`;
+            accHistoryCount.innerText = `${visibleOrders.length} Pesanan`;
+
+            if (visibleOrders.length > 0) {
+                bellBadge.innerText = visibleOrders.length;
+                bellBadge.classList.remove('hidden');
+            } else {
+                bellBadge.classList.add('hidden');
+            }
+
+            if (visibleOrders.length === 0) {
+                const emptyHtml = `
+                    <div class="bg-slate-900/70 border border-slate-800 rounded-lg p-4 text-center text-xs text-slate-400">
+                        Belum ada riwayat pesanan yang tercatat.
+                    </div>
+                `;
+                listContainer.innerHTML = emptyHtml;
+                dList.innerHTML = emptyHtml;
+                accHistoryList.innerHTML = `<div class="text-slate-500 text-center py-2">Belum ada transaksi.</div>`;
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            dList.innerHTML = '';
+            accHistoryList.innerHTML = '';
+
+            visibleOrders.slice().reverse().forEach(order => {
+                const isDone = order.status === "Selesai";
+                const statusBadgeClass = isDone
+                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                    : "bg-amber-500/20 text-amber-300 border-amber-500/40";
+
+                let adminActionHtml = '';
+                if (isPrivileged) {
+                    const nextStatus = isDone ? "Masih Diproses" : "Selesai";
+                    adminActionHtml = `
+                        <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[10px] text-slate-400">Pembeli: <b class="text-white">${order.buyerUsername}</b></span>
+                            <button onclick="triggerSparkle(this); toggleOrderStatus('${order.id}')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-2.5 py-1 rounded text-[10px] transition-all">
+                                Ubah ke "${nextStatus}"
+                            </button>
+                        </div>
+                    `;
+                }
+
+                const cardHtml = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono font-bold text-cyan-400">${order.id}</span>
+                        <span class="px-2 py-0.5 rounded border text-[10px] font-bold ${statusBadgeClass}">
+                            ${order.status}
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 text-[11px] text-slate-300">
+                        <div>Layanan: <b class="text-white">${order.game}</b></div>
+                        <div>Item: <b class="text-cyan-300">${order.item}</b></div>
+                        <div>Detail: <b class="text-white font-mono">${order.gameAccount}</b></div>
+                        <div>Total: <b class="text-emerald-400 font-mono">Rp ${order.total.toLocaleString('id-ID')}</b></div>
+                    </div>
+                    <div class="text-[10px] text-slate-500 flex justify-between">
+                        <span>${order.payment} • Admin ${order.adminTarget}</span>
+                        <span>${order.createdAt}</span>
+                    </div>
+                    ${adminActionHtml}
+                `;
+
+                const card1 = document.createElement('div');
+                card1.className = "bg-slate-900/90 border border-slate-800 rounded-lg p-3 text-xs space-y-2";
+                card1.innerHTML = cardHtml;
+                listContainer.appendChild(card1);
+
+                const card2 = document.createElement('div');
+                card2.className = "bg-slate-900/90 border border-slate-800 rounded-lg p-3 text-xs space-y-2";
+                card2.innerHTML = cardHtml;
+                dList.appendChild(card2);
+
+                const miniItem = document.createElement('div');
+                miniItem.className = "bg-slate-950/80 border border-slate-800 rounded-lg p-2 flex items-center justify-between";
+                miniItem.innerHTML = `
+                    <div>
+                        <div class="font-bold text-white">${order.item}</div>
+                        <div class="text-[10px] text-slate-400">${order.id} • Rp ${order.total.toLocaleString('id-ID')}</div>
+                    </div>
+                    <span class="px-1.5 py-0.5 rounded border text-[9px] font-bold ${statusBadgeClass}">${order.status}</span>
+                `;
+                accHistoryList.appendChild(miniItem);
+            });
+        }
+
+        function toggleOrderStatus(orderId) {
+            const user = getCurrentUser();
+            if (!user || (user.role !== 'OWNER' && user.role !== 'ADMIN')) {
+                alert("Hanya Owner dan Admin yang dapat mengubah status pesanan!");
+                return;
+            }
+
+            const allOrders = getAllOrders();
+            const idx = allOrders.findIndex(o => o.id === orderId);
+            if (idx !== -1) {
+                allOrders[idx].status = (allOrders[idx].status === "Masih Diproses") ? "Selesai" : "Masih Diproses";
+                setAllOrders(allOrders);
+                renderOrdersList();
+                updateStoreStatistics();
+            }
+        }
+
+        // ==========================================
+        // 5. DATA GAME, HARGA, VOUCHER & SPIN
+        // ==========================================
         const gameData = {
             roblox: {
                 name: "Roblox",
@@ -382,6 +2194,7 @@
         let currentPayment = 'qris';
         let currentAdmin = 1;
         let appliedVoucher = null;
+        let isSpinning = false;
 
         const defaultVouchers = {
             "GENTZSTORETOPUPTERPERCAYA": { discountPercent: 5, maxQuota: 5 },
@@ -406,12 +2219,200 @@
             localStorage.setItem('gentz_voucher_usage', JSON.stringify(usage));
         }
 
+        function getSpinVouchers() {
+            return JSON.parse(localStorage.getItem('gentz_spin_vouchers') || '{}');
+        }
+
+        function setSpinVouchers(vouchers) {
+            localStorage.setItem('gentz_spin_vouchers', JSON.stringify(vouchers));
+        }
+
+        function getSpinCredits() {
+            const val = localStorage.getItem('gentz_spin_credits');
+            if (val === null) {
+                localStorage.setItem('gentz_spin_credits', '1');
+                return 1;
+            }
+            return parseInt(val, 10);
+        }
+
+        function setSpinCredits(credits) {
+            localStorage.setItem('gentz_spin_credits', String(credits));
+        }
+
+        function getTopupCount() {
+            return parseInt(localStorage.getItem('gentz_topup_count') || '0', 10);
+        }
+
+        function setTopupCount(count) {
+            localStorage.setItem('gentz_topup_count', String(count));
+        }
+
+        function isMilestone50Claimed() {
+            return localStorage.getItem('gentz_milestone_50_claimed') === 'true';
+        }
+
+        function setMilestone50Claimed(claimed) {
+            localStorage.setItem('gentz_milestone_50_claimed', claimed ? 'true' : 'false');
+        }
+
         function updateQuotaDisplay() {
             const usage = getUserVoucherUsage();
             const q1 = defaultVouchers["GENTZSTORETOPUPTERPERCAYA"].maxQuota - (usage["GENTZSTORETOPUPTERPERCAYA"] || 0);
             const q2 = defaultVouchers["GENTZSTORE100%TERPERCAYA"].maxQuota - (usage["GENTZSTORE100%TERPERCAYA"] || 0);
             document.getElementById('quota-1').innerText = Math.max(0, q1);
             document.getElementById('quota-2').innerText = Math.max(0, q2);
+
+            const spinVouchers = getSpinVouchers();
+            const listContainer = document.getElementById('spin-vouchers-list');
+            listContainer.innerHTML = '';
+
+            Object.keys(spinVouchers).forEach(code => {
+                const v = spinVouchers[code];
+                if (!v.used) {
+                    const div = document.createElement('div');
+                    div.className = "bg-cyan-950/40 p-2 rounded border border-cyan-500/40 flex items-center justify-between";
+                    div.innerHTML = `
+                        <div>
+                            <span class="font-mono font-bold text-cyan-300">${code}</span> - Diskon ${v.discountPercent}% <span class="text-[10px] text-emerald-400">(1× pakai)</span>
+                        </div>
+                        <button onclick="useSpinVoucherDirect('${code}')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-2 py-0.5 rounded text-[10px]">Pakai</button>
+                    `;
+                    listContainer.appendChild(div);
+                }
+            });
+
+            updateSpinUI();
+        }
+
+        function updateSpinUI() {
+            const credits = getSpinCredits();
+            const topupCount = getTopupCount();
+            const claimed50 = isMilestone50Claimed();
+
+            document.getElementById('topup-count-display').innerText = topupCount;
+
+            const btnSpin = document.getElementById('btn-spin');
+            if (credits > 0) {
+                btnSpin.disabled = false;
+                btnSpin.className = "w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-orbitron font-bold py-2.5 px-3 rounded-lg text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer";
+                btnSpin.innerHTML = `<i class="fa-solid fa-dharmachakra"></i><span>PUTAR SPIN (${credits}×)</span>`;
+            } else {
+                btnSpin.disabled = true;
+                btnSpin.className = "w-full bg-slate-800 border border-slate-700 text-slate-500 font-orbitron font-bold py-2.5 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-not-allowed";
+                btnSpin.innerHTML = `<i class="fa-solid fa-lock"></i><span>TOP UP UNTUK SPIN LAGI</span>`;
+            }
+
+            const btnClaim50 = document.getElementById('btn-claim-50');
+            const btnClaim50Text = document.getElementById('btn-claim-50-text');
+
+            if (claimed50) {
+                btnClaim50.disabled = true;
+                btnClaim50.className = "w-full bg-slate-800 border border-slate-700 text-emerald-400 font-orbitron font-bold py-2.5 px-3 rounded-lg text-[11px] flex items-center justify-center gap-1.5 cursor-not-allowed";
+                btnClaim50Text.innerText = "DISKON 50% SUDAH DIKLAIM";
+            } else if (topupCount >= 50) {
+                btnClaim50.disabled = false;
+                btnClaim50.className = "w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-orbitron font-bold py-2.5 px-3 rounded-lg text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer";
+                btnClaim50Text.innerText = "KLAIM VOUCHER DISKON 50%!";
+            } else {
+                btnClaim50.disabled = true;
+                btnClaim50.className = "w-full bg-slate-800 border border-slate-700 text-slate-400 font-orbitron font-bold py-2.5 px-3 rounded-lg text-[11px] flex items-center justify-center gap-1.5 cursor-not-allowed";
+                btnClaim50Text.innerText = `DISKON 50% (${topupCount}/50× TOP UP)`;
+            }
+        }
+
+        function spinReward() {
+            if (isSpinning) return;
+            const credits = getSpinCredits();
+            if (credits <= 0) {
+                alert("Kesempatan spin Anda habis! Lakukan top up untuk mendapatkan kesempatan spin berikutnya.");
+                return;
+            }
+
+            isSpinning = true;
+            setSpinCredits(credits - 1);
+            updateSpinUI();
+
+            const labelEl = document.getElementById('spin-result-label');
+            const subEl = document.getElementById('spin-result-sub');
+            const displayBox = document.getElementById('spin-display-box');
+
+            displayBox.classList.add('spin-anim', 'border-cyan-400');
+            subEl.innerText = "Mengacak hadiah keberuntunganmu...";
+
+            const fakePrizes = ["DISKON 1%", "DISKON 3%", "DISKON 5%", "DISKON 10%", "DISKON 1%", "DISKON 3%"];
+            let step = 0;
+            const interval = setInterval(() => {
+                labelEl.innerText = fakePrizes[step % fakePrizes.length];
+                labelEl.className = "font-orbitron font-bold text-base text-cyan-400";
+                step++;
+            }, 90);
+
+            const rand = Math.random() * 100;
+            let wonDiscount = 1;
+            if (rand < 60) {
+                wonDiscount = 1;
+            } else if (rand < 90) {
+                wonDiscount = 3;
+            } else if (rand < 99) {
+                wonDiscount = 5;
+            } else {
+                wonDiscount = 10;
+            }
+
+            setTimeout(() => {
+                clearInterval(interval);
+                displayBox.classList.remove('spin-anim');
+                isSpinning = false;
+
+                const randomCode = `GENTZSPIN${wonDiscount}-${Math.floor(1000 + Math.random() * 9000)}`;
+                const spinVouchers = getSpinVouchers();
+                spinVouchers[randomCode] = {
+                    discountPercent: wonDiscount,
+                    used: false
+                };
+                setSpinVouchers(spinVouchers);
+
+                labelEl.innerText = `🎉 SELAMAT! DISKON ${wonDiscount}%`;
+                labelEl.className = "font-orbitron font-extrabold text-base text-emerald-400";
+                subEl.innerHTML = `Kode Voucher: <b class="text-cyan-300 font-mono">${randomCode}</b> (Tersimpan di daftar voucher)`;
+
+                updateQuotaDisplay();
+            }, 1800);
+        }
+
+        function claimMilestone50() {
+            const topupCount = getTopupCount();
+            if (topupCount < 50) {
+                alert(`Anda baru melakukan ${topupCount}× top up. Lakukan hingga 50× top up di Gentz Store untuk membuka voucher Diskon 50%!`);
+                return;
+            }
+            if (isMilestone50Claimed()) {
+                alert("Voucher Diskon 50% sudah pernah diklaim.");
+                return;
+            }
+
+            setMilestone50Claimed(true);
+            const code50 = `GENTZVIP50-${Math.floor(1000 + Math.random() * 9000)}`;
+            const spinVouchers = getSpinVouchers();
+            spinVouchers[code50] = {
+                discountPercent: 50,
+                used: false
+            };
+            setSpinVouchers(spinVouchers);
+
+            const labelEl = document.getElementById('spin-result-label');
+            const subEl = document.getElementById('spin-result-sub');
+            labelEl.innerText = `👑 REWARD 50× TOP UP: DISKON 50%!`;
+            labelEl.className = "font-orbitron font-extrabold text-sm text-amber-400";
+            subEl.innerHTML = `Kode Voucher Spesial: <b class="text-cyan-300 font-mono">${code50}</b>`;
+
+            updateQuotaDisplay();
+        }
+
+        function useSpinVoucherDirect(code) {
+            document.getElementById('voucher-input').value = code;
+            applyVoucher();
         }
 
         function updateWIBClock() {
@@ -434,6 +2435,21 @@
 
             document.getElementById('admin2-badge').className = isAdmin2Online ? "text-emerald-400 font-bold" : "text-slate-400";
             document.getElementById('admin2-badge').innerText = `Admin 2: ${isAdmin2Online ? 'ONLINE' : 'OFFLINE'}`;
+
+            const c1 = document.getElementById('card-admin1-status');
+            const c2 = document.getElementById('card-admin2-status');
+            if (c1) {
+                c1.innerText = isAdmin1Online ? 'ONLINE' : 'OFFLINE';
+                c1.className = isAdmin1Online
+                    ? "text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                    : "text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400";
+            }
+            if (c2) {
+                c2.innerText = isAdmin2Online ? 'ONLINE' : 'OFFLINE';
+                c2.className = isAdmin2Online
+                    ? "text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                    : "text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-400";
+            }
         }
 
         function selectGame(gameKey) {
@@ -492,6 +2508,7 @@
             document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('active-card'));
             document.getElementById(`pay-${payKey}`).classList.add('active-card');
             document.getElementById('sum-payment').innerText = payKey.toUpperCase();
+            updateSummary();
         }
 
         function selectAdmin(adminNum) {
@@ -509,6 +2526,28 @@
                 msg.className = "text-xs mt-2 text-rose-400 font-semibold";
                 msg.innerText = "Masukkan kode voucher terlebih dahulu!";
                 msg.classList.remove('hidden');
+                return;
+            }
+
+            const spinVouchers = getSpinVouchers();
+            if (spinVouchers[input]) {
+                if (spinVouchers[input].used) {
+                    msg.className = "text-xs mt-2 text-rose-400 font-semibold";
+                    msg.innerText = "Voucher spin ini sudah pernah digunakan!";
+                    msg.classList.remove('hidden');
+                    appliedVoucher = null;
+                    updateSummary();
+                    return;
+                }
+                appliedVoucher = {
+                    code: input,
+                    discountPercent: spinVouchers[input].discountPercent,
+                    isSpinVoucher: true
+                };
+                msg.className = "text-xs mt-2 text-emerald-400 font-semibold";
+                msg.innerText = `Voucher spin dipasang! Diskon ${spinVouchers[input].discountPercent}%`;
+                msg.classList.remove('hidden');
+                updateSummary();
                 return;
             }
 
@@ -534,7 +2573,11 @@
                 return;
             }
 
-            appliedVoucher = { code: input, discountPercent: voucher.discountPercent };
+            appliedVoucher = {
+                code: input,
+                discountPercent: voucher.discountPercent,
+                isSpinVoucher: false
+            };
             msg.className = "text-xs mt-2 text-emerald-400 font-semibold";
             msg.innerText = `Voucher dipasang! Diskon ${voucher.discountPercent}%`;
             msg.classList.remove('hidden');
@@ -551,13 +2594,36 @@
                 discount = Math.round(subtotal * (appliedVoucher.discountPercent / 100));
             }
 
-            const total = Math.max(0, subtotal - discount);
+            const total = Math.max(0, subtotal - discount) + ADMIN_TRANSACTION_FEE;
 
             document.getElementById('sum-item').innerText = currentSelectedItem.name;
+
+            const discountRow = document.getElementById('sum-discount-row');
+            if (discount > 0) {
+                discountRow.classList.remove('hidden');
+                document.getElementById('sum-discount').innerText = `-Rp ${discount.toLocaleString('id-ID')} (${appliedVoucher.discountPercent}%)`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
             document.getElementById('sum-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+
+            const sbWarning = document.getElementById('topup-sociabuzz-warning');
+            if (currentPayment === 'sociabuzz' && total < 15000) {
+                sbWarning.classList.remove('hidden');
+            } else {
+                sbWarning.classList.add('hidden');
+            }
         }
 
         function processCheckout() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                alert("🔒 Anda wajib login terlebih dahulu untuk melakukan Top-Up dan Cek Pesanan!");
+                document.getElementById('auth-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
             const userId = document.getElementById('user-id').value.trim();
             const zoneId = document.getElementById('zone-id').value.trim();
             const game = gameData[currentSelectedGame];
@@ -572,20 +2638,61 @@
                 return;
             }
 
-            if (appliedVoucher) {
-                const usage = getUserVoucherUsage();
-                usage[appliedVoucher.code] = (usage[appliedVoucher.code] || 0) + 1;
-                setUserVoucherUsage(usage);
-                updateQuotaDisplay();
-            }
-
             const subtotal = currentSelectedItem.price;
             const discount = appliedVoucher ? Math.round(subtotal * (appliedVoucher.discountPercent / 100)) : 0;
-            const total = subtotal - discount;
+            const total = Math.max(0, subtotal - discount) + ADMIN_TRANSACTION_FEE;
+
+            if (currentPayment === 'sociabuzz' && total < 15000) {
+                alert("⚠️ Pembayaran via SociaBuzz minimal Rp 15.000! Silakan pilih metode pembayaran QRIS (tanpa minimal) atau pilih paket dengan total minimal Rp 15.000.");
+                return;
+            }
+
+            if (appliedVoucher) {
+                if (appliedVoucher.isSpinVoucher) {
+                    const spinVouchers = getSpinVouchers();
+                    if (spinVouchers[appliedVoucher.code]) {
+                        spinVouchers[appliedVoucher.code].used = true;
+                        setSpinVouchers(spinVouchers);
+                    }
+                } else {
+                    const usage = getUserVoucherUsage();
+                    usage[appliedVoucher.code] = (usage[appliedVoucher.code] || 0) + 1;
+                    setUserVoucherUsage(usage);
+                }
+            }
+
+            const newTopupCount = getTopupCount() + 1;
+            setTopupCount(newTopupCount);
+            setSpinCredits(getSpinCredits() + 1);
+
+            const orderId = `GS-${Math.floor(100000 + Math.random() * 900000)}`;
+            const nowStr = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta', hour12: false });
+            const allOrders = getAllOrders();
+            allOrders.push({
+                id: orderId,
+                buyerUsername: currentUser.username,
+                game: game.name,
+                gameAccount: game.hasZone ? `${userId} (${zoneId})` : userId,
+                item: currentSelectedItem.name,
+                payment: currentPayment.toUpperCase(),
+                adminTarget: currentAdmin,
+                total: total,
+                status: "Masih Diproses",
+                createdAt: `${nowStr} WIB`
+            });
+            setAllOrders(allOrders);
+
+            const officialReceiver = currentPayment === 'qris'
+                ? "Gentz Store Coach Arfie, Cikarang, Kesehatan & Olahraga"
+                : "Gentz Store / gentza201414";
 
             let msg = ` Halo Admin ${currentAdmin} (Gentz Store),
 Saya ingin melakukan Top-Up Game dengan detail berikut:
 
+`;
+            msg += ` Kode Pesanan: ${orderId}
+`;
+            msg += ` Akun Pembeli: ${currentUser.username}
 `;
             msg += ` Toko: Gentz Store
 `;
@@ -597,7 +2704,7 @@ Saya ingin melakukan Top-Up Game dengan detail berikut:
 `;
             msg += ` Item: ${currentSelectedItem.name}
 `;
-            msg += ` Pembayaran: ${currentPayment.toUpperCase()}
+            msg += ` Pembayaran: ${currentPayment.toUpperCase()} (${officialReceiver})
 `;
             if (appliedVoucher) {
                 msg += ` Kode Voucher: ${appliedVoucher.code} (-${appliedVoucher.discountPercent}%)
@@ -605,10 +2712,19 @@ Saya ingin melakukan Top-Up Game dengan detail berikut:
             }
             msg += ` Subtotal: Rp ${subtotal.toLocaleString('id-ID')}
 `;
+            msg += ` Biaya Admin: Rp ${ADMIN_TRANSACTION_FEE.toLocaleString('id-ID')}
+`;
             msg += ` Total Bayar: Rp ${total.toLocaleString('id-ID')}
 
 `;
             msg += `Mohon instruksi pembayaran selengkapnya. Terima kasih!`;
+
+            appliedVoucher = null;
+            document.getElementById('voucher-input').value = '';
+            document.getElementById('voucher-msg').classList.add('hidden');
+            updateQuotaDisplay();
+            updateSummary();
+            renderOrdersList();
 
             const phone = adminNumbers[currentAdmin];
             const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
@@ -617,7 +2733,11 @@ Saya ingin melakukan Top-Up Game dengan detail berikut:
 
         window.onload = () => {
             selectGame('roblox');
+            renderNokosTable();
+            validateNokosPayment();
             updateQuotaDisplay();
+            updateAuthUI();
+            updateStoreStatistics();
             updateWIBClock();
             setInterval(updateWIBClock, 1000);
         };
