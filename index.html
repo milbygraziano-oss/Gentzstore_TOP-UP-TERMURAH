@@ -133,8 +133,18 @@
                 <span id="nav-center-title" class="font-bold text-base tracking-wide text-white">Home</span>
             </div>
 
-            <!-- 📢 Saluran WA, ! Aturan Toko, ❓ Bantuan, 👤 Logo Orang & 🔔 Logo Lonceng -->
+            <!-- 📲 Aplikasi Resmi, 🌐 Website Resmi, 📢 Saluran WA, ! Aturan Toko, ❓ Bantuan, 👤 Logo Orang & 🔔 Logo Lonceng -->
             <div class="flex items-center gap-1 sm:gap-1.5">
+                <!-- TOMBOL APLIKASI RESMI -->
+                <button onclick="triggerSparkle(this); openAppModal()" aria-label="Aplikasi Resmi" title="Aplikasi Resmi Gentz Store" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sky-400 text-base cursor-pointer relative border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/25">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </button>
+
+                <!-- TOMBOL WEBSITE RESMI -->
+                <button onclick="triggerSparkle(this); openWebsiteModal()" aria-label="Website Resmi" title="Website Resmi Gentz Store" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-cyan-400 text-base cursor-pointer relative border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/25">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
+
                 <!-- TOMBOL SALURAN WHATSAPP RESMI -->
                 <button onclick="triggerSparkle(this); openChannelModal()" aria-label="Saluran WhatsApp Resmi" title="Saluran WhatsApp Resmi Gentz Store" class="nav-icon-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-emerald-400 text-base cursor-pointer relative border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/25">
                     <i class="fa-brands fa-whatsapp"></i>
@@ -269,6 +279,119 @@
         </div>
     </div>
 
+
+    <!-- =====================================================================
+         📲 MODAL APLIKASI RESMI GENTZ STORE
+         ===================================================================== -->
+    <div id="app-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="card-box w-full max-w-md rounded-2xl border-2 border-sky-500/70 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <!-- Header Modal Aplikasi -->
+            <div class="bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-500 px-4 py-3.5 flex items-center justify-between text-slate-950">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-slate-950 text-sky-400 flex items-center justify-center text-base shadow">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron font-extrabold text-xs sm:text-sm tracking-wide">📲 APLIKASI RESMI GENTZ STORE</h3>
+                        <p class="text-[10px] font-bold text-slate-900">GENTZ STORE OFFICIAL APK</p>
+                    </div>
+                </div>
+                <button onclick="closeAllDrawers()" class="w-7 h-7 rounded-full bg-slate-950/20 hover:bg-slate-950/40 flex items-center justify-center text-slate-950 text-xs cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Isi Modal Aplikasi -->
+            <div class="p-4 overflow-y-auto chat-scroll space-y-3.5 text-xs bg-slate-950/95">
+                
+                <!-- Tautan Unduh Resmi -->
+                <div class="bg-sky-950/40 border border-sky-500/50 rounded-xl p-3.5 space-y-2.5 text-center">
+                    <div class="font-bold text-sky-300 text-xs">🔹 Unduh Aplikasi Gentz Store di sini:</div>
+                    <a href="https://www.mediafire.com/file/zyidvs6dgpukol7/Gentz+store+_+top+up+termurah_2.apk/file" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-orbitron font-extrabold py-3 px-3 rounded-xl text-xs shadow-lg shadow-sky-500/25 transition-all">
+                        <i class="fa-solid fa-download text-sm mr-1"></i> UNDUH APLIKASI RESMI (6.11 MB)
+                    </a>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-lg p-2 text-[10px] font-mono text-sky-300 break-all select-all">
+                        https://www.mediafire.com/file/zyidvs6dgpukol7/Gentz+store+_+top+up+termurah_2.apk/file
+                    </div>
+                </div>
+
+                <!-- Peringatan Keamanan -->
+                <div class="bg-amber-500/10 border border-amber-500/50 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-amber-400 text-xs">⚠️ PERINGATAN:</div>
+                    <ul class="space-y-1.5 text-amber-200 leading-relaxed pl-1 font-medium">
+                        <li>• Ini <b>SATU-SATUNYA</b> tautan unduh aplikasi resmi Gentz Store</li>
+                        <li>• Selain link di atas → <b class="text-rose-400">BUKAN aplikasi resmi Gentz Store</b></li>
+                        <li>• File: <b class="text-white font-mono">Gentz store _ top up termurah_2.apk (6.11 MB)</b></li>
+                        <li>• Pastikan unduh dari link resmi di atas untuk keamanan perangkat Anda</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="p-3 bg-slate-900 border-t border-slate-800">
+                <button onclick="triggerSparkle(this); closeAllDrawers()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-orbitron font-bold py-2.5 rounded-xl text-xs transition-all cursor-pointer">
+                    TUTUP
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         🌐 MODAL WEBSITE RESMI GENTZ STORE
+         ===================================================================== -->
+    <div id="website-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="card-box w-full max-w-md rounded-2xl border-2 border-cyan-500/70 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+            <!-- Header Modal Website -->
+            <div class="bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-600 px-4 py-3.5 flex items-center justify-between text-slate-950">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-slate-950 text-cyan-400 flex items-center justify-center text-base shadow">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-orbitron font-extrabold text-xs sm:text-sm tracking-wide">🌐 WEBSITE RESMI GENTZ STORE</h3>
+                        <p class="text-[10px] font-bold text-slate-900">GENTZ STORE OFFICIAL WEBSITE</p>
+                    </div>
+                </div>
+                <button onclick="closeAllDrawers()" class="w-7 h-7 rounded-full bg-slate-950/20 hover:bg-slate-950/40 flex items-center justify-center text-slate-950 text-xs cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Isi Modal Website -->
+            <div class="p-4 overflow-y-auto chat-scroll space-y-3.5 text-xs bg-slate-950/95">
+                
+                <!-- Tautan Resmi -->
+                <div class="bg-cyan-950/40 border border-cyan-500/50 rounded-xl p-3.5 space-y-2.5 text-center">
+                    <div class="font-bold text-cyan-300 text-xs">🔹 Satu-satunya website resmi Gentz Store Top Up:</div>
+                    <a href="https://milbygraziano-oss.github.io/Gentzstore_TOP-UP-TERMURAH/" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-orbitron font-extrabold py-3 px-3 rounded-xl text-xs shadow-lg shadow-cyan-500/25 transition-all">
+                        <i class="fa-solid fa-globe text-sm mr-1"></i> BUKA WEBSITE RESMI GENTZ STORE
+                    </a>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-lg p-2 text-[10px] font-mono text-cyan-300 break-all select-all">
+                        https://milbygraziano-oss.github.io/Gentzstore_TOP-UP-TERMURAH/
+                    </div>
+                </div>
+
+                <!-- Peringatan Keamanan -->
+                <div class="bg-amber-500/10 border border-amber-500/50 rounded-xl p-3.5 space-y-1.5">
+                    <div class="font-orbitron font-bold text-amber-400 text-xs">⚠️ PERINGATAN:</div>
+                    <ul class="space-y-1.5 text-amber-200 leading-relaxed pl-1 font-medium">
+                        <li>• Selain alamat di atas → <b class="text-rose-400">BUKAN website resmi Gentz Store</b></li>
+                        <li>• Selalu periksa alamat URL sebelum melakukan transaksi</li>
+                        <li>• Gentz Store tidak bertanggung jawab atas situs palsu yang mirip</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="p-3 bg-slate-900 border-t border-slate-800">
+                <button onclick="triggerSparkle(this); closeAllDrawers()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-orbitron font-bold py-2.5 rounded-xl text-xs transition-all cursor-pointer">
+                    TUTUP
+                </button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- =====================================================================
          📢 MODAL SALURAN WHATSAPP RESMI GENTZ STORE
          ===================================================================== -->
@@ -351,6 +474,14 @@
                 <button id="menu-btn-nokos" onclick="triggerSparkle(this); switchPage('nokos'); closeAllDrawers();" class="w-full text-left p-3 rounded-xl border border-slate-700 bg-slate-900/80 hover:border-sky-400 text-white font-bold text-xs flex items-center justify-between transition-all">
                     <span>🛒 Beli Nokos</span>
                     <span class="bg-sky-500 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">BIRU CERAH</span>
+                </button>
+                <button onclick="triggerSparkle(this); openAppModal();" class="w-full text-left p-3 rounded-xl border border-sky-500/50 bg-sky-500/10 hover:border-sky-400 text-sky-300 font-bold text-xs flex items-center justify-between transition-all">
+                    <span>📲 Aplikasi Resmi Gentz Store (APK)</span>
+                    <span class="bg-sky-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">6.11 MB</span>
+                </button>
+                <button onclick="triggerSparkle(this); openWebsiteModal();" class="w-full text-left p-3 rounded-xl border border-cyan-500/50 bg-cyan-500/10 hover:border-cyan-400 text-cyan-300 font-bold text-xs flex items-center justify-between transition-all">
+                    <span>🌐 Website Resmi Gentz Store</span>
+                    <span class="bg-cyan-400 text-slate-950 font-extrabold text-[9px] px-2 py-0.5 rounded-full">OFFICIAL</span>
                 </button>
                 <button onclick="triggerSparkle(this); openChannelModal();" class="w-full text-left p-3 rounded-xl border border-emerald-500/50 bg-emerald-500/10 hover:border-emerald-400 text-emerald-300 font-bold text-xs flex items-center justify-between transition-all">
                     <span>📢 Saluran WhatsApp Resmi</span>
@@ -589,6 +720,54 @@
             </div>
         </div>
 
+        <!-- BANNER APLIKASI RESMI GENTZ STORE -->
+        <div class="bg-gradient-to-r from-sky-500/20 via-blue-500/15 to-cyan-500/20 border border-sky-500/60 rounded-xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-sky-500 text-slate-950 text-lg flex items-center justify-center shrink-0 shadow-md shadow-sky-500/30">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div>
+                        <div class="font-orbitron font-bold text-xs text-sky-300">📲 APLIKASI RESMI GENTZ STORE</div>
+                        <div class="text-[11px] text-slate-300">File: <span class="font-mono text-white">Gentz store _ top up termurah_2.apk</span> (6.11 MB)</div>
+                    </div>
+                </div>
+                <button onclick="triggerSparkle(this); openAppModal()" class="bg-slate-900 hover:bg-slate-800 border border-sky-500/50 text-sky-300 font-bold text-[10px] px-2.5 py-1 rounded-lg shrink-0 cursor-pointer">
+                    INFO
+                </button>
+            </div>
+            <a href="https://www.mediafire.com/file/zyidvs6dgpukol7/Gentz+store+_+top+up+termurah_2.apk/file" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full text-center bg-sky-500 hover:bg-sky-400 text-slate-950 font-orbitron font-extrabold py-2 rounded-lg text-[11px] transition-all">
+                👉 UNDUH APLIKASI RESMI GENTZ STORE
+            </a>
+            <div class="text-[10px] text-amber-300/90 text-center">
+                ⚠️ Satu-satunya link unduh resmi • Selain link di atas <span class="underline">BUKAN aplikasi resmi Gentz Store</span>
+            </div>
+        </div>
+
+        <!-- BANNER WEBSITE RESMI GENTZ STORE -->
+        <div class="bg-gradient-to-r from-cyan-500/20 via-blue-500/15 to-cyan-500/20 border border-cyan-500/60 rounded-xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-cyan-500 text-slate-950 text-lg flex items-center justify-center shrink-0 shadow-md shadow-cyan-500/30">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div>
+                        <div class="font-orbitron font-bold text-xs text-cyan-300">🌐 WEBSITE RESMI GENTZ STORE</div>
+                        <div class="text-[11px] text-slate-300">Satu-satunya website resmi top-up &amp; beli nokos terpercaya</div>
+                    </div>
+                </div>
+                <button onclick="triggerSparkle(this); openWebsiteModal()" class="bg-slate-900 hover:bg-slate-800 border border-cyan-500/50 text-cyan-300 font-bold text-[10px] px-2.5 py-1 rounded-lg shrink-0 cursor-pointer">
+                    INFO
+                </button>
+            </div>
+            <a href="https://milbygraziano-oss.github.io/Gentzstore_TOP-UP-TERMURAH/" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block w-full text-center bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-orbitron font-extrabold py-2 rounded-lg text-[11px] transition-all">
+                👉 BUKA WEBSITE RESMI GENTZ STORE
+            </a>
+            <div class="text-[10px] text-amber-300/90 text-center">
+                ⚠️ Selain alamat di atas → <span class="underline">bukan website resmi Gentz Store</span>
+            </div>
+        </div>
+
         <!-- BANNER SALURAN WHATSAPP RESMI GENTZ STORE -->
         <div class="bg-gradient-to-r from-emerald-500/20 via-teal-500/15 to-emerald-500/20 border border-emerald-500/60 rounded-xl p-3.5 space-y-2.5">
             <div class="flex items-center justify-between gap-2">
@@ -731,33 +910,93 @@
                 <h3 class="font-orbitron font-bold text-sm text-white">Pilih Game</h3>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="game-grid">
+            <div class="grid grid-cols-1 gap-2.5" id="game-grid">
+                <!-- 1. Roblox -->
                 <div onclick="triggerSparkle(this); selectGame('roblox')" id="game-roblox" class="game-card active-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
-                    <i class="fa-solid fa-cube text-cyan-400 text-lg w-5 text-center"></i>
+                    <div class="w-7 h-7 rounded-md overflow-hidden shrink-0 bg-slate-900 border border-slate-700/80 flex items-center justify-center">
+                        <svg viewBox="0 0 32 32" class="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" fill="#0f172a"/>
+                            <g transform="rotate(14 16 16)">
+                                <rect x="6" y="6" width="20" height="20" rx="2.5" fill="#e2e8f0"/>
+                                <rect x="13.2" y="13.2" width="5.6" height="5.6" rx="0.8" fill="#0f172a"/>
+                            </g>
+                        </svg>
+                    </div>
                     <div>
                         <div class="font-semibold text-xs text-white">Roblox</div>
                         <div class="text-[10px] text-slate-400">Robux</div>
                     </div>
                 </div>
 
+                <!-- 2. Mobile Legends -->
                 <div onclick="triggerSparkle(this); selectGame('mlbb')" id="game-mlbb" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
-                    <i class="fa-solid fa-shield-halved text-yellow-400 text-lg w-5 text-center"></i>
+                    <div class="w-7 h-7 rounded-md overflow-hidden shrink-0 bg-slate-900 border border-slate-700/80 flex items-center justify-center">
+                        <svg viewBox="0 0 32 32" class="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="mlBg" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#1e3a8a"/>
+                                    <stop offset="100%" stop-color="#0284c7"/>
+                                </linearGradient>
+                                <linearGradient id="mlGold" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#fde047"/>
+                                    <stop offset="100%" stop-color="#d97706"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="32" height="32" fill="url(#mlBg)"/>
+                            <path d="M16 4 L25 8.5 V17 C25 22.5 21 26.2 16 28 C11 26.2 7 22.5 7 17 V8.5 Z" fill="url(#mlGold)"/>
+                            <path d="M11 20 V11 L16 16 L21 11 V20 H18.8 V15.2 L16 18 L13.2 15.2 V20 Z" fill="#0f172a"/>
+                        </svg>
+                    </div>
                     <div>
                         <div class="font-semibold text-xs text-white">Mobile Legends</div>
                         <div class="text-[10px] text-slate-400">Diamonds</div>
                     </div>
                 </div>
 
+                <!-- 3. Free Fire -->
                 <div onclick="triggerSparkle(this); selectGame('ff')" id="game-ff" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
-                    <i class="fa-solid fa-fire text-orange-500 text-lg w-5 text-center"></i>
+                    <div class="w-7 h-7 rounded-md overflow-hidden shrink-0 bg-slate-900 border border-slate-700/80 flex items-center justify-center">
+                        <svg viewBox="0 0 32 32" class="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="ffBg" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#7c2d12"/>
+                                    <stop offset="100%" stop-color="#1e293b"/>
+                                </linearGradient>
+                                <linearGradient id="ffFlame" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#fde047"/>
+                                    <stop offset="50%" stop-color="#f97316"/>
+                                    <stop offset="100%" stop-color="#dc2626"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="32" height="32" fill="url(#ffBg)"/>
+                            <path d="M17.5 5 C17.5 5 23.5 10.5 23.5 17.2 C23.5 22.3 19.8 26.5 15.5 26.5 C11.2 26.5 8.5 23 8.5 18.8 C8.5 15.6 10.6 12.8 12.2 11.5 C11.8 13.8 13 15.2 14.2 15.2 C13.5 11.8 15.2 8 17.5 5 Z" fill="url(#ffFlame)"/>
+                            <path d="M15.8 16.5 C17.8 18 18.5 20 18.5 21.8 C18.5 23.6 17.1 25 15.4 25 C13.7 25 12.5 23.7 12.5 22 C12.5 20.4 13.8 18.6 15.8 16.5 Z" fill="#fef08a"/>
+                        </svg>
+                    </div>
                     <div>
                         <div class="font-semibold text-xs text-white">Free Fire</div>
                         <div class="text-[10px] text-slate-400">Diamonds</div>
                     </div>
                 </div>
 
+                <!-- 4. PUBG Mobile -->
                 <div onclick="triggerSparkle(this); selectGame('pubg')" id="game-pubg" class="game-card card-box rounded-lg p-3 cursor-pointer border border-slate-700 flex items-center gap-3 transition-all">
-                    <i class="fa-solid fa-crosshair text-emerald-400 text-lg w-5 text-center"></i>
+                    <div class="w-7 h-7 rounded-md overflow-hidden shrink-0 bg-slate-900 border border-slate-700/80 flex items-center justify-center">
+                        <svg viewBox="0 0 32 32" class="w-7 h-7" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="pubgBg" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#eab308"/>
+                                    <stop offset="100%" stop-color="#a16207"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="32" height="32" fill="url(#pubgBg)"/>
+                            <rect x="4" y="8" width="24" height="16" rx="2" fill="#0f172a"/>
+                            <path d="M11 12.5 C11 11.2 12.2 10.5 14 10.5 H18 C19.8 10.5 21 11.2 21 12.5 V15.5 H11 Z" fill="#facc15"/>
+                            <rect x="12.2" y="13" width="3" height="1.6" rx="0.4" fill="#0f172a"/>
+                            <rect x="16.8" y="13" width="3" height="1.6" rx="0.4" fill="#0f172a"/>
+                            <path d="M11.5 16.5 H20.5 L19.8 21.5 H12.2 Z" fill="#cbd5e1"/>
+                        </svg>
+                    </div>
                     <div>
                         <div class="font-semibold text-xs text-white">PUBG Mobile</div>
                         <div class="text-[10px] text-slate-400">Unknown Cash (UC)</div>
@@ -1005,6 +1244,34 @@
             </div>
         </div>
 
+        <!-- Banner Aplikasi Resmi di Halaman Nokos -->
+        <a href="https://www.mediafire.com/file/zyidvs6dgpukol7/Gentz+store+_+top+up+termurah_2.apk/file" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-lg border-2 border-sky-200 transition-all">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-slate-950 text-sky-400 text-base flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <div>
+                    <div class="font-orbitron font-extrabold text-xs">📲 APLIKASI RESMI GENTZ STORE (6.11 MB)</div>
+                    <div class="text-[11px] font-semibold">Klik untuk unduh APK resmi Gentz store _ top up termurah_2.apk</div>
+                </div>
+            </div>
+            <span class="bg-slate-950 text-sky-400 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0">UNDUH</span>
+        </a>
+
+        <!-- Banner Website Resmi di Halaman Nokos -->
+        <a href="https://milbygraziano-oss.github.io/Gentzstore_TOP-UP-TERMURAH/" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-lg border-2 border-cyan-200 transition-all">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-slate-950 text-cyan-400 text-base flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div>
+                    <div class="font-orbitron font-extrabold text-xs">🌐 WEBSITE RESMI GENTZ STORE</div>
+                    <div class="text-[11px] font-semibold">Klik untuk buka website resmi top-up &amp; nokos</div>
+                </div>
+            </div>
+            <span class="bg-slate-950 text-cyan-400 font-extrabold text-[10px] px-2.5 py-1 rounded-lg shrink-0">BUKA</span>
+        </a>
+
         <!-- Banner Saluran WhatsApp Resmi di Halaman Nokos -->
         <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" onclick="triggerSparkle(this)" class="block bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-lg border-2 border-emerald-200 transition-all">
             <div class="flex items-center gap-2.5">
@@ -1112,7 +1379,13 @@
     </div>
 
     <footer class="border-t border-slate-800 py-4 text-center text-[11px] text-slate-500 space-y-1.5">
-        <div>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://www.mediafire.com/file/zyidvs6dgpukol7/Gentz+store+_+top+up+termurah_2.apk/file" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline font-semibold">
+                <i class="fa-solid fa-mobile-screen-button"></i> Aplikasi Resmi Gentz Store (APK)
+            </a>
+            <a href="https://milbygraziano-oss.github.io/Gentzstore_TOP-UP-TERMURAH/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-semibold">
+                <i class="fa-solid fa-globe"></i> Website Resmi Gentz Store
+            </a>
             <a href="https://whatsapp.com/channel/0029VbEHrLx8qIzvui7DYt1t" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline font-semibold">
                 <i class="fa-brands fa-whatsapp"></i> Saluran WhatsApp Resmi Gentz Store
             </a>
@@ -1148,6 +1421,18 @@
             closeAllDrawers();
             document.getElementById('drawer-backdrop').classList.remove('hidden');
             document.getElementById('rules-modal').classList.remove('hidden');
+        }
+
+        function openAppModal() {
+            closeAllDrawers();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('app-modal').classList.remove('hidden');
+        }
+
+        function openWebsiteModal() {
+            closeAllDrawers();
+            document.getElementById('drawer-backdrop').classList.remove('hidden');
+            document.getElementById('website-modal').classList.remove('hidden');
         }
 
         function openChannelModal() {
@@ -1648,6 +1933,8 @@ Saya ingin membeli NOKOS dengan detail berikut:
             document.getElementById('orders-drawer').classList.add('hidden');
             document.getElementById('help-chat-modal').classList.add('hidden');
             document.getElementById('rules-modal').classList.add('hidden');
+            document.getElementById('app-modal').classList.add('hidden');
+            document.getElementById('website-modal').classList.add('hidden');
             document.getElementById('channel-modal').classList.add('hidden');
         }
 
